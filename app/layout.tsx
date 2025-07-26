@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { Navigation } from "./components/Navigation";
 import "./globals.css";
 
+import { Roboto, Nunito} from 'next/font/google'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+const openSans = Roboto({
+  subsets: ['latin'],
+  display: 'swap',
+  //👇 Add variable to our object
+  variable: '--font-opensans',
+})
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+//👇 Configure the object for our second font
+const robotoMono = Nunito({
+  // subsets: ['latin'],
+  // display: 'swap',
+  variable: '--font-roboto-mono',
+})
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -27,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${openSans.variable} ${robotoMono.variable}  antialiased`}
       >
         <Navigation />
         <div className="min-h-screen">

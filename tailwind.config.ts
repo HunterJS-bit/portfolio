@@ -25,6 +25,11 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
+				fontFamily: {
+					// 👇 Add CSS variables
+					sans: ["var(--font-opensans)"],
+					mono: ["var(--font-roboto-mono)"],
+				  },
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
 					foreground: 'hsl(var(--primary-foreground))',

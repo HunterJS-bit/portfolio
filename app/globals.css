@@ -75,10 +75,10 @@
   
   body {
     @apply bg-background text-foreground;
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: --font-roboto-mono, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply font-medium tracking-tight;
+    font-family: --font-opensans;
   }
 }
