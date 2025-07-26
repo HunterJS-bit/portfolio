@@ -1,3 +1,5 @@
+import { Mail, Github, Linkedin, Download } from 'lucide-react';
+
 export const Contact = () => {
     return (
         <section id="contact" className="py-20">
@@ -17,7 +19,7 @@ export const Contact = () => {
                     href="mailto:hello@johndoe"
                     className="flex items-center gap-3 text-sm hover:text-muted-foreground transition-colors"
                   >
-                    {/* <Mail size={16} /> */}
+                    <Mail size={16} />
                     hello@johndoe
                   </a>
                   
@@ -25,7 +27,7 @@ export const Contact = () => {
                     href="#"
                     className="flex items-center gap-3 text-sm hover:text-muted-foreground transition-colors"
                   >
-                    {/* <Github size={16} /> */}
+                    <Github size={16} />
                     github.com/johndoe
                   </a>
                   
@@ -33,7 +35,7 @@ export const Contact = () => {
                     href="#"
                     className="flex items-center gap-3 text-sm hover:text-muted-foreground transition-colors"
                   >
-                    {/* <Linkedin size={16} /> */}
+                    <Linkedin size={16} />
                     linkedin.com/in/johndoe
                   </a>
                   
@@ -41,7 +43,7 @@ export const Contact = () => {
                     href="#"
                     className="flex items-center gap-3 text-sm hover:text-muted-foreground transition-colors"
                   >
-                    {/* <FileText size={16} /> */}
+                    <Download size={16} />
                     Download Resume
                   </a>
                 </div>
