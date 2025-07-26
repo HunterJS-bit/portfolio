@@ -9,13 +9,6 @@ const featuredWork = [
         link: "#"
     },
     {
-        title: "Wayfinder",
-        year: "2018",
-        category: "Personal project",
-        image: "/placeholder.svg",
-        link: "#"
-    },
-    {
         title: "Couture",
         year: "2012",
         category: "Personal project",
