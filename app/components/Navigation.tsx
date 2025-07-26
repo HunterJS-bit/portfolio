@@ -26,6 +26,12 @@ export const Navigation = () => {
                 work
               </a>
               <a
+                href="#blog"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              >
+                blog
+              </a>
+              <a
                 href="#contact"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
