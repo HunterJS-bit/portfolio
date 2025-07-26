@@ -1,5 +1,5 @@
 
-
+import Link from 'next/link';
 
 export const Navigation = () => {
     return (
@@ -25,12 +25,12 @@ export const Navigation = () => {
               >
                 work
               </a>
-              <a
-                href="#blog"
+              <Link 
+                href="/blog" 
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 blog
-              </a>
+              </Link>
               <a
                 href="#contact"
                 className="text-sm text-muted-foreground hover:text-foreground transition-colors"
