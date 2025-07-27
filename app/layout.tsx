@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import { ThemeProvider } from "next-themes";
 import { Navigation } from "./components/Navigation";
 import "./globals.css";
 
-import { Roboto, Nunito} from 'next/font/google'
+import { Roboto, Nunito } from 'next/font/google'
 
 const openSans = Roboto({
   subsets: ['latin'],
@@ -30,14 +31,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${openSans.variable} ${robotoMono.variable}  antialiased`}
       >
-        <Navigation />
-        <div className="min-h-screen">
-          {children}
-        </div>
+        <ThemeProvider attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange>
+          <Navigation />
+          <div className="min-h-screen">
+            {children}
+          </div>
+        </ThemeProvider>
 
       </body>
     </html>
