@@ -1,7 +1,7 @@
 
 "use client";
 import Link from 'next/link';
-import { Moon, Sun } from "lucide-react"; // Or any other icons
+import { Moon, Sun } from "lucide-react";
 import { useTheme } from 'next-themes';
 
 export const Navigation = () => {
@@ -18,12 +18,12 @@ export const Navigation = () => {
             </a>
           </h1>
           <div className="flex items-center gap-8">
-            <a
-              href="#about"
+            <Link
+              href="/about"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               about
-            </a>
+            </Link>
             <a
               href="#work"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -36,12 +36,12 @@ export const Navigation = () => {
             >
               blog
             </Link>
-            <a
-              href="#contact"
+            <Link
+              href="/about"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               contact
-            </a>
+            </Link>
           </div>
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}

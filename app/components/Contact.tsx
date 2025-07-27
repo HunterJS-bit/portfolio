@@ -5,13 +5,13 @@ export const Contact = () => {
         <section id="contact" className="py-20">
         <div className="max-w-4xl mx-auto px-6">
           <div className="border-t border-border pt-16">
-            <h2 className="text-2xl font-medium mb-12">get in touch</h2>
+            <h2 className="text-2xl font-medium mb-12">let’s connect</h2>
             
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <p className="text-muted-foreground leading-relaxed">
                   I'm always interested in hearing about new opportunities and projects. 
-                  Whether you have a question or just want to say hello, feel free to reach out.
+                  Feel free to connect with me on any of these platforms!
                 </p>
                 
                 <div className="space-y-4">
