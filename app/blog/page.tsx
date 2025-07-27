@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft, ChevronRight, ChevronLeft } from "lucide-react";
+import { Calendar, Clock, ArrowLeft } from "lucide-react";
+import { Pagination } from "../components/Pagination";
 
 
 const blogPosts = [
@@ -69,8 +70,8 @@ const Page = () => {
                         <ArrowLeft className="w-4 h-4 mr-2" />
                         Back to home
                     </Link>
-                    <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
-                    <p className="text-xl text-gray-600 max-w-2xl leading-relaxed">
+                    <h1 className="text-4xl md:text-5xl font-medium  mb-4">Blog</h1>
+                    <p className="text-xl max-w-2xl leading-relaxed">
                         Thoughts on web development, technology, and building great products.
                     </p>
                 </div>
@@ -82,13 +83,13 @@ const Page = () => {
                             <Link key={post.id} href={`/blog/${post.id}`}>
                                 <div className="flex justify-between items-start mb-4">
                                     <div className="flex-1">
-                                        <h2 className="text-xl font-semibold text-gray-900 group-hover:text-gray-700 transition-colors mb-2">
+                                        <h2 className="text-xl transition-colors mb-2">
                                             {post.title}
                                         </h2>
-                                        <p className="text-gray-600 mb-4 leading-relaxed">
+                                        <p className="mb-4 leading-relaxed">
                                             {post.excerpt}
                                         </p>
-                                        <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
+                                        <div className="flex items-center gap-4 text-sm  mb-4">
                                             <div className="flex items-center gap-1">
                                                 <Calendar className="w-4 h-4" />
                                                 {new Date(post.date).toLocaleDateString('en-US', {
@@ -108,21 +109,7 @@ const Page = () => {
                         ))}
                     </div>
                 </div>
-                <nav className="flex items-center gap-x-1" aria-label="Pagination">
-                    <button type="button" className="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Previous" disabled="">
-                        <ChevronLeft />
-                        <span>Previous</span>
-                    </button>
-                    <div className="flex items-center gap-x-1">
-                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center bg-gray-200 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none" aria-current="page">1</button>
-                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">2</button>
-                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">3</button>
-                    </div>
-                    <button type="button" className="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
-                        <span>Next</span>
-                        <ChevronRight />
-                    </button>
-                </nav>
+                <Pagination />
             </section>
         </div>
 
