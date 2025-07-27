@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { Calendar, Clock, ArrowLeft, ChevronRight, ChevronLeft } from "lucide-react";
+
+
 const blogPosts = [
     {
         id: 'building-scalable-react-apps',
@@ -59,11 +62,11 @@ const blogPosts = [
 
 const Page = () => {
     return (
-        <div>
-            <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto pt-32 pb-20 px-5">
+            <section id="blog">
                 <div className="max-w-4xl mx-auto">
                     <Link href="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-8 text-sm">
-                        {/* <ArrowLeft className="w-4 h-4 mr-2" /> */}
+                        <ArrowLeft className="w-4 h-4 mr-2" />
                         Back to home
                     </Link>
                     <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">Blog</h1>
@@ -72,13 +75,11 @@ const Page = () => {
                     </p>
                 </div>
             </section>
-            <section className="pb-20 px-6">
+            <section className="pt-10 px-5">
                 <div className="max-w-4xl mx-auto">
                     <div className="space-y-8">
                         {blogPosts.map((post, index) => (
                             <Link key={post.id} href={`/blog/${post.id}`}>
-                                {/* <Card className="border border-gray-200 hover:border-gray-300 transition-all duration-200 group cursor-pointer">
-                <CardContent className="p-6"> */}
                                 <div className="flex justify-between items-start mb-4">
                                     <div className="flex-1">
                                         <h2 className="text-xl font-semibold text-gray-900 group-hover:text-gray-700 transition-colors mb-2">
@@ -89,33 +90,39 @@ const Page = () => {
                                         </p>
                                         <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                                             <div className="flex items-center gap-1">
-                                                {/* <Calendar className="w-4 h-4" />
-                          {new Date(post.date).toLocaleDateString('en-US', { 
-                            year: 'numeric', 
-                            month: 'long', 
-                            day: 'numeric' 
-                          })} */}
+                                                <Calendar className="w-4 h-4" />
+                                                {new Date(post.date).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'long',
+                                                    day: 'numeric'
+                                                })}
                                             </div>
                                             <div className="flex items-center gap-1">
-                                                {/* <Clock className="w-4 h-4" /> */}
+                                                <Clock className="w-4 h-4" />
                                                 {post.readTime}
                                             </div>
                                         </div>
-                                        <div className="flex flex-wrap gap-2">
-                                            {/* {post.tags.map((tag, tagIndex) => (
-                        //   <Badge key={tagIndex} variant="secondary" className="bg-gray-100 text-gray-700 hover:bg-gray-200 text-xs">
-                        //     {tag}
-                        //   </Badge>
-                        ))} */}
-                                        </div>
                                     </div>
                                 </div>
-                                {/* </CardContent>
-              </Card> */}
                             </Link>
                         ))}
                     </div>
                 </div>
+                <nav className="flex items-center gap-x-1" aria-label="Pagination">
+                    <button type="button" class="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Previous" disabled="">
+                        <ChevronLeft />
+                        <span>Previous</span>
+                    </button>
+                    <div className="flex items-center gap-x-1">
+                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center bg-gray-200 text-gray-800 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-300 disabled:opacity-50 disabled:pointer-events-none" aria-current="page">1</button>
+                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">2</button>
+                        <button type="button" className="min-h-9.5 min-w-9.5 flex justify-center items-center text-gray-800 hover:bg-gray-100 py-2 px-3 text-sm rounded-lg focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none">3</button>
+                    </div>
+                    <button type="button" className="min-h-9.5 min-w-9.5 py-2 px-2.5 inline-flex justify-center items-center gap-x-1.5 text-sm rounded-lg text-gray-800 hover:bg-gray-100 focus:outline-hidden focus:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" aria-label="Next">
+                        <span>Next</span>
+                        <ChevronRight />
+                    </button>
+                </nav>
             </section>
         </div>
 
