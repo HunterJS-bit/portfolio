@@ -8,14 +8,18 @@ export const Navigation = () => {
 
   const { theme, setTheme } = useTheme();
 
+  const changeTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark")
+  }
+
   return (
-    <nav className="fixed top-0 w-full bg-background/80 backdrop-blur-sm z-50 border-b border-border/50">
+    <nav className="top-0 w-full bg-background/80 backdrop-blur-sm z-50 border-b border-border/50">
       <div className="max-w-4xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <h1 className="text-lg font-medium">
-            <a href="/" className="hover:text-muted-foreground transition-colors">
+            <Link href="/" className="hover:text-muted-foreground transition-colors">
               john doe
-            </a>
+            </Link>
           </h1>
           <div className="flex items-center gap-8">
             <Link
@@ -44,7 +48,7 @@ export const Navigation = () => {
             </Link>
           </div>
           <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={changeTheme}
             className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all cursor-pointer"
             aria-label="Toggle theme"
           >

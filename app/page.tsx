@@ -1,7 +1,6 @@
 import { About } from '@/app/components/AboutSection';
 import { Contact } from '@/app/components/Contact';
 import { Work } from './components/OurWorkSection';
-import { Footer } from "@/app/components/Footer";
 
 export default function Home() {
   return (
@@ -9,7 +8,6 @@ export default function Home() {
       <About />
       <Work />
       <Contact />
-      <Footer />
     </>
   );
 }

@@ -63,7 +63,7 @@ const blogPosts = [
 
 const Page = () => {
     return (
-        <div className="max-w-4xl mx-auto pt-32 pb-20 px-5">
+        <div className="max-w-4xl mx-auto px-5">
             <section id="blog">
                 <div className="max-w-4xl mx-auto">
                     <Link href="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-8 text-sm">
