@@ -10,7 +10,7 @@ export const Contact = () => {
             <div className="grid md:grid-cols-2 gap-12">
               <div className="space-y-6">
                 <p className="text-muted-foreground leading-relaxed">
-                  I'm always interested in hearing about new opportunities and projects. 
+                  Im always interested in hearing about new opportunities and projects. 
                   Feel free to connect with me on any of these platforms!
                 </p>
                 

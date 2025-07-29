@@ -41,7 +41,7 @@ export const Navigation = () => {
               blog
             </Link>
             <Link
-              href="/about"
+              href="/contact"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               contact
