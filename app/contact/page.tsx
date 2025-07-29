@@ -1,15 +1,24 @@
+"use client";
 
+import { useForm, SubmitHandler } from "react-hook-form"
 
-
+type Inputs = {
+    example: string
+    exampleRequired: string
+  }
 
 const ContactPage = () => {
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } = useForm<Inputs>()
+
+    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
 
 
-    const onSubmit = (data: any) => {
-        console.log("Form submitted:", data);
-
-    };
     return (<div className="max-w-4xl mx-auto px-5 py-20 ">
 
         <div className="flex justify-center">
@@ -22,8 +31,8 @@ const ContactPage = () => {
                     We help companies and individuals build out their brand guidelines.
                 </p>
 
-                <form className="space-y-6">
-                    <div>
+                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                    <div className="">
                         <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
                             First Name
                         </label>
