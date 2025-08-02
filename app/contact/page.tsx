@@ -3,20 +3,21 @@
 import { useForm, SubmitHandler } from "react-hook-form"
 
 type Inputs = {
-    example: string
-    exampleRequired: string
-  }
+    firstName: string
+    lastName: string
+    email: string
+    message: string
+}
 
 const ContactPage = () => {
 
     const {
         register,
         handleSubmit,
-        watch,
         formState: { errors },
-      } = useForm<Inputs>()
+    } = useForm<Inputs>()
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<Inputs> = (data) => console.log("Submited form", data)
 
 
     return (<div className="max-w-4xl mx-auto px-5 py-20 ">
@@ -38,6 +39,7 @@ const ContactPage = () => {
                         </label>
                         <input
                             type={"text"}
+                            {...register("firstName", { required: true })}
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
@@ -48,6 +50,7 @@ const ContactPage = () => {
                         </label>
                         <input
                             type={"text"}
+                            {...register("lastName", { required: true })}
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
@@ -59,10 +62,13 @@ const ContactPage = () => {
                             Email
                         </label>
                         <input
-                            type={"text"}
+                            type={"email"}
+                            {...register("email", { required: "Email Address is required" })}
+                            aria-invalid={errors.email ? "true" : "false"}
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
+                        {errors.email && <p role="alert">{errors.email.message}</p>}
                     </div>
 
 
@@ -71,7 +77,10 @@ const ContactPage = () => {
                             Message
                         </label>
                         <textarea
-                            className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" />
+                            {...register("message", { required: true })}
+                            className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+                        </textarea>
+                        {errors.message && <p role="alert">{errors.message.message}</p>}
                     </div>
                     <button type="submit"
                         className="w-full bg-[#6366f1] hover:bg-[#5856eb] text-white font-medium py-3 rounded-lg cursor-pointer">
