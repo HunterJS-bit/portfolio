@@ -28,12 +28,12 @@ export const Navigation = () => {
             >
               about
             </Link>
-            <a
-              href="#work"
+            <Link
+              href="/work"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
               work
-            </a>
+            </Link>
             <Link
               href="/blog"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
