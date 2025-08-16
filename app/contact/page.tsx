@@ -43,6 +43,9 @@ const ContactPage = () => {
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
+                        {errors.firstName?.type === "required" && (
+                            <p role="alert">First name is required</p>
+                        )}
                     </div>
                     <div >
                         <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
@@ -54,6 +57,9 @@ const ContactPage = () => {
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
+                        {errors.lastName?.type === "required" && (
+                            <p role="alert">Last name is required</p>
+                        )}
                     </div>
 
 
@@ -68,7 +74,9 @@ const ContactPage = () => {
                             className={
                                 "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
                         />
-                        {errors.email && <p role="alert">{errors.email.message}</p>}
+                        {errors.email?.type === "required" && (
+                            <p role="alert">Email field is required</p>
+                        )}
                     </div>
 
 
@@ -80,7 +88,9 @@ const ContactPage = () => {
                             {...register("message", { required: true })}
                             className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
                         </textarea>
-                        {errors.message && <p role="alert">{errors.message.message}</p>}
+                        {errors.message?.type === "required" && (
+                            <p role="alert">Message field is required</p>
+                        )}
                     </div>
                     <button type="submit"
                         className="w-full bg-[#6366f1] hover:bg-[#5856eb] text-white font-medium py-3 rounded-lg cursor-pointer">
