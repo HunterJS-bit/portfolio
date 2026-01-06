@@ -1,8 +1,10 @@
+import { Section } from "./Section";
+
 export const About = () => {
   return (
     <section id="about" className="pb-20">
       <div className="max-w-4xl mx-auto px-6">
-        <div className="max-w-2xl">
+        <Section className="max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-medium mb-8 leading-tight">
             software engineer at{" "}
             <a
@@ -39,7 +41,7 @@ export const About = () => {
               </li>
             </ul>
           </div>
-        </div>
+        </Section>
       </div>
     </section>
   )

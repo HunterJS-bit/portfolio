@@ -1,25 +1,26 @@
+import { Section } from "./Section";
 
 const moreWork = [
     {
         title: "Found Money",
         year: "2016",
         company: "Acorns",
-        image: "/placeholder.svg",
-        link: "#"
+        image: "/found_money.png",
+        link: "/work/found-money"
     },
     {
         title: "Foundry",
         year: "2017 - 2019",
         company: "Palantir",
-        image: "/placeholder.svg",
-        link: "#"
+        image: "/foundry.png",
+        link: "/work/foundry"
     },
     {
         title: "Data Visualization",
         year: "2020",
         company: "Notion",
-        image: "/placeholder.svg",
-        link: "#"
+        image: "/data_viz.png",
+        link: "/work/data-visualization"
     }
 ];
 
@@ -28,8 +29,7 @@ export const Work = () => {
     return (
         <section id="work" className="py-20">
             <div className="max-w-4xl mx-auto px-6">
-
-                <div>
+                <Section>
                     <h2 className="text-2xl font-medium mb-12">more work</h2>
 
                     <div className="grid md:grid-cols-2 gap-8">
@@ -55,7 +55,7 @@ export const Work = () => {
                             </a>
                         ))}
                     </div>
-                </div>
+                </Section>
             </div>
         </section>
     )
