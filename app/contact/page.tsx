@@ -20,9 +20,9 @@ const ContactPage = () => {
                 </Link>
 
                 <div className="max-w-2xl">
-                    <h1 className="text-4xl md:text-5xl font-medium mb-4">Let's talk</h1>
+                    <h1 className="text-4xl md:text-5xl font-medium mb-4">Let&apos;s talk</h1>
                     <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
-                        Have a project in mind? I'm always open to discussing new opportunities and interesting ideas.
+                        Have a project in mind? I&apos;m always open to discussing new opportunities and interesting ideas.
                     </p>
 
                     {state.success ? (
