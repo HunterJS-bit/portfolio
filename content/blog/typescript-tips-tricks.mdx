@@ -1,0 +1,32 @@
+---
+title: "TypeScript Tips and Tricks for Better Code"
+date: "2024-01-08"
+excerpt: "Discover advanced TypeScript features and patterns that will make your code more robust and maintainable."
+readTime: "6 min read"
+tags: ["TypeScript", "JavaScript", "Best Practices"]
+---
+
+# TypeScript Tips and Tricks
+
+TypeScript is a game-changer for large-scale JavaScript development. Here are some tips to help you write better code.
+
+## Utility Types
+
+TypeScript provides several utility types that can simplify your code:
+
+- `Partial<T>`
+- `Pick<T, K>`
+- `Omit<T, K>`
+
+## Discriminated Unions
+
+Discriminated unions are a powerful way to handle complex state:
+
+```typescript
+type State = 
+  | { status: 'loading' }
+  | { status: 'success', data: string }
+  | { status: 'error', error: Error };
+```
+
+This ensures that you only access `data` when the status is `success`.

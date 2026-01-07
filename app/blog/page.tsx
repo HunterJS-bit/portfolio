@@ -1,119 +1,83 @@
 import Link from "next/link";
 import { Calendar, Clock, ArrowLeft } from "lucide-react";
 import { Pagination } from "../components/Pagination";
+import { getPaginatedPosts } from "@/lib/blog";
+import { Section } from "../components/Section";
 
+type Props = {
+    searchParams: Promise<{ page?: string }>;
+};
 
-const blogPosts = [
-    {
-        id: 'building-scalable-react-apps',
-        title: 'Building Scalable React Applications',
-        excerpt: 'Learn the best practices and patterns for building React applications that can grow with your team and user base.',
-        date: '2024-01-15',
-        readTime: '8 min read',
-        tags: ['React', 'JavaScript', 'Architecture'],
-        published: true
-    },
-    {
-        id: 'typescript-tips-tricks',
-        title: 'TypeScript Tips and Tricks for Better Code',
-        excerpt: 'Discover advanced TypeScript features and patterns that will make your code more robust and maintainable.',
-        date: '2024-01-08',
-        readTime: '6 min read',
-        tags: ['TypeScript', 'JavaScript', 'Best Practices'],
-        published: true
-    },
-    {
-        id: 'nextjs-performance-optimization',
-        title: 'Next.js Performance Optimization Guide',
-        excerpt: 'A comprehensive guide to optimizing your Next.js applications for better performance and user experience.',
-        date: '2024-01-01',
-        readTime: '12 min read',
-        tags: ['Next.js', 'Performance', 'Web Development'],
-        published: true
-    },
-    {
-        id: 'modern-css-techniques',
-        title: 'Modern CSS Techniques Every Developer Should Know',
-        excerpt: 'Explore the latest CSS features and techniques that will improve your styling workflow and create better user interfaces.',
-        date: '2023-12-20',
-        readTime: '10 min read',
-        tags: ['CSS', 'Frontend', 'Design'],
-        published: true
-    },
-    {
-        id: 'api-design-best-practices',
-        title: 'RESTful API Design Best Practices',
-        excerpt: 'Learn how to design clean, maintainable, and scalable APIs that your team and users will love.',
-        date: '2023-12-15',
-        readTime: '9 min read',
-        tags: ['API', 'Backend', 'Node.js'],
-        published: true
-    },
-    {
-        id: 'developer-productivity-tools',
-        title: 'Essential Developer Productivity Tools in 2024',
-        excerpt: 'A curated list of tools and extensions that will boost your productivity as a developer.',
-        date: '2023-12-10',
-        readTime: '7 min read',
-        tags: ['Productivity', 'Tools', 'Development'],
-        published: true
-    }
-];
+const POSTS_PER_PAGE = 5;
 
+export default async function BlogPage({ searchParams }: Props) {
+    const { page } = await searchParams;
+    const currentPage = parseInt(page || "1", 10);
 
-const Page = () => {
+    const { posts, totalPages } = await getPaginatedPosts(currentPage, POSTS_PER_PAGE);
+
     return (
-        <div className="max-w-4xl mx-auto px-5">
-            <section id="blog">
-                <div className="max-w-4xl mx-auto">
-                    <Link href="/" className="inline-flex items-center text-gray-600 hover:text-gray-900 transition-colors mb-8 text-sm">
-                        <ArrowLeft className="w-4 h-4 mr-2" />
-                        Back to home
-                    </Link>
-                    <h1 className="text-4xl md:text-5xl font-medium  mb-4">Blog</h1>
-                    <p className="text-xl max-w-2xl leading-relaxed">
-                        Thoughts on web development, technology, and building great products.
-                    </p>
-                </div>
-            </section>
-            <section className="pt-10 px-5">
-                <div className="max-w-4xl mx-auto">
-                    <div className="space-y-8">
-                        {blogPosts.map((post, index) => (
-                            <Link key={post.id} href={`/blog/${post.id}`}>
-                                <div className="flex justify-between items-start mb-4">
-                                    <div className="flex-1">
-                                        <h2 className="text-xl transition-colors mb-2">
-                                            {post.title}
-                                        </h2>
-                                        <p className="mb-4 leading-relaxed">
-                                            {post.excerpt}
-                                        </p>
-                                        <div className="flex items-center gap-4 text-sm  mb-4">
-                                            <div className="flex items-center gap-1">
-                                                <Calendar className="w-4 h-4" />
-                                                {new Date(post.date).toLocaleDateString('en-US', {
-                                                    year: 'numeric',
-                                                    month: 'long',
-                                                    day: 'numeric'
-                                                })}
-                                            </div>
-                                            <div className="flex items-center gap-1">
-                                                <Clock className="w-4 h-4" />
-                                                {post.readTime}
-                                            </div>
+        <div className="max-w-4xl mx-auto px-6 py-20">
+            <Section>
+                <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to home
+                </Link>
+
+                <h1 className="text-4xl md:text-5xl font-medium mb-4">Blog</h1>
+                <p className="text-xl text-muted-foreground max-w-2xl mb-16 leading-relaxed">
+                    Thoughts on web development, technology, and building great products.
+                </p>
+
+                <div className="space-y-12">
+                    {posts.length > 0 ? (
+                        posts.map((post) => (
+                            <Link key={post.id} href={`/blog/${post.id}`} className="block group">
+                                <article className="space-y-4">
+                                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                                        <div className="flex items-center gap-1">
+                                            <Calendar className="w-4 h-4" />
+                                            {new Date(post.date).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </div>
+                                        <div className="flex items-center gap-1">
+                                            <Clock className="w-4 h-4" />
+                                            {post.readTime}
                                         </div>
                                     </div>
-                                </div>
+
+                                    <h2 className="text-2xl font-medium group-hover:text-muted-foreground transition-colors">
+                                        {post.title}
+                                    </h2>
+
+                                    <p className="text-muted-foreground leading-relaxed max-w-2xl">
+                                        {post.excerpt}
+                                    </p>
+
+                                    <div className="flex items-center gap-2">
+                                        {post.tags.map((tag) => (
+                                            <span key={tag} className="text-xs px-2 py-1 bg-muted rounded-md text-muted-foreground">
+                                                {tag}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </article>
                             </Link>
-                        ))}
-                    </div>
+                        ))
+                    ) : (
+                        <p className="text-muted-foreground">No posts found on this page.</p>
+                    )}
                 </div>
-                <Pagination />
-            </section>
+
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    baseUrl="/blog"
+                />
+            </Section>
         </div>
-
-    )
+    );
 }
-
-export default Page;

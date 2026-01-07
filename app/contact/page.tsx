@@ -1,114 +1,138 @@
 "use client";
 
-import { useForm, SubmitHandler } from "react-hook-form"
+import { useActionState } from "react";
+import { submitContactForm, ContactState } from "./actions";
+import { ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
+import Link from "next/link";
+import { Section } from "../components/Section";
 
-type Inputs = {
-    firstName: string
-    lastName: string
-    email: string
-    message: string
-}
+const initialState: ContactState = {};
 
 const ContactPage = () => {
+    const [state, formAction, isPending] = useActionState(submitContactForm, initialState);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<Inputs>()
+    return (
+        <div className="max-w-4xl mx-auto px-6 py-20">
+            <Section>
+                <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Back to home
+                </Link>
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => console.log("Submited form", data)
-
-
-    return (<div className="max-w-4xl mx-auto px-5 py-20 ">
-
-        <div className="flex justify-center">
-            {/* Contact Form */}
-            <div>
-                <h2 className="text-4xl font-bold text-foreground mb-4 text-center">
-                    Let's talk about your project
-                </h2>
-                <p className="text-muted-foreground mb-8 text-lg text-center">
-                    We help companies and individuals build out their brand guidelines.
-                </p>
-
-                <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-                    <div className="">
-                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            First Name
-                        </label>
-                        <input
-                            type={"text"}
-                            {...register("firstName", { required: true })}
-                            className={
-                                "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
-                        />
-                        {errors.firstName?.type === "required" && (
-                            <p role="alert">First name is required</p>
-                        )}
-                    </div>
-                    <div >
-                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Last Name
-                        </label>
-                        <input
-                            type={"text"}
-                            {...register("lastName", { required: true })}
-                            className={
-                                "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
-                        />
-                        {errors.lastName?.type === "required" && (
-                            <p role="alert">Last name is required</p>
-                        )}
-                    </div>
-
-
-                    <div>
-                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Email
-                        </label>
-                        <input
-                            type={"email"}
-                            {...register("email", { required: "Email Address is required" })}
-                            aria-invalid={errors.email ? "true" : "false"}
-                            className={
-                                "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"}
-                        />
-                        {errors.email?.type === "required" && (
-                            <p role="alert">Email field is required</p>
-                        )}
-                    </div>
-
-
-                    <div>
-                        <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-                            Message
-                        </label>
-                        <textarea
-                            {...register("message", { required: true })}
-                            className="flex min-h-[120px] w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
-                        </textarea>
-                        {errors.message?.type === "required" && (
-                            <p role="alert">Message field is required</p>
-                        )}
-                    </div>
-                    <button type="submit"
-                        className="w-full bg-[#6366f1] hover:bg-[#5856eb] text-white font-medium py-3 rounded-lg cursor-pointer">
-                        Let's talk
-                    </button>
-
-
-                    <p className="text-sm text-muted-foreground">
-                        By submitting this form, I agree to the{" "}
-                        <a href="#" className="text-[#6366f1] hover:underline">
-                            privacy policy
-                        </a>
-                        .
+                <div className="max-w-2xl">
+                    <h1 className="text-4xl md:text-5xl font-medium mb-4">Let's talk</h1>
+                    <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
+                        Have a project in mind? I'm always open to discussing new opportunities and interesting ideas.
                     </p>
-                </form>
-            </div>
+
+                    {state.success ? (
+                        <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-8 flex items-start gap-4">
+                            <CheckCircle2 className="w-6 h-6 text-green-500 shrink-0 mt-1" />
+                            <div>
+                                <h3 className="text-lg font-medium text-green-500 mb-2">Message sent!</h3>
+                                <p className="text-green-500/80 leading-relaxed">
+                                    {state.message}
+                                </p>
+                                <button
+                                    onClick={() => window.location.reload()}
+                                    className="mt-6 text-sm font-medium hover:underline"
+                                >
+                                    Send another message
+                                </button>
+                            </div>
+                        </div>
+                    ) : (
+                        <form action={formAction} className="space-y-8">
+                            <div className="grid md:grid-cols-2 gap-8">
+                                <div className="space-y-2">
+                                    <label htmlFor="firstName" className="text-sm font-medium">
+                                        First Name
+                                    </label>
+                                    <input
+                                        id="firstName"
+                                        name="firstName"
+                                        type="text"
+                                        placeholder="Jane"
+                                        className={`w-full bg-muted/50 border ${state.errors?.firstName ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
+                                    />
+                                    {state.errors?.firstName && (
+                                        <p className="text-xs text-red-500 flex items-center gap-1">
+                                            <AlertCircle className="w-3 h-3" /> {state.errors.firstName[0]}
+                                        </p>
+                                    )}
+                                </div>
+                                <div className="space-y-2">
+                                    <label htmlFor="lastName" className="text-sm font-medium">
+                                        Last Name
+                                    </label>
+                                    <input
+                                        id="lastName"
+                                        name="lastName"
+                                        type="text"
+                                        placeholder="Doe"
+                                        className={`w-full bg-muted/50 border ${state.errors?.lastName ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
+                                    />
+                                    {state.errors?.lastName && (
+                                        <p className="text-xs text-red-500 flex items-center gap-1">
+                                            <AlertCircle className="w-3 h-3" /> {state.errors.lastName[0]}
+                                        </p>
+                                    )}
+                                </div>
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="email" className="text-sm font-medium">
+                                    Email Address
+                                </label>
+                                <input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="jane@example.com"
+                                    className={`w-full bg-muted/50 border ${state.errors?.email ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
+                                />
+                                {state.errors?.email && (
+                                    <p className="text-xs text-red-500 flex items-center gap-1">
+                                        <AlertCircle className="w-3 h-3" /> {state.errors.email[0]}
+                                    </p>
+                                )}
+                            </div>
+
+                            <div className="space-y-2">
+                                <label htmlFor="message" className="text-sm font-medium">
+                                    Message
+                                </label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows={6}
+                                    placeholder="Tell me about your project..."
+                                    className={`w-full bg-muted/50 border ${state.errors?.message ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all resize-none`}
+                                />
+                                {state.errors?.message && (
+                                    <p className="text-xs text-red-500 flex items-center gap-1">
+                                        <AlertCircle className="w-3 h-3" /> {state.errors.message[0]}
+                                    </p>
+                                )}
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={isPending}
+                                className="w-full md:w-auto px-8 py-4 bg-foreground text-background font-medium rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                {isPending ? "Sending..." : "Send Message"}
+                            </button>
+
+                            {state.message && !state.success && (
+                                <p className="text-sm text-red-500 text-center">{state.message}</p>
+                            )}
+                        </form>
+                    )}
+                </div>
+            </Section>
         </div>
-    </div>)
+    );
 }
 
 export default ContactPage;
