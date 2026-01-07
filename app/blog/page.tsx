@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Calendar, Clock, ArrowLeft } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Pagination } from "../components/Pagination";
 import { getPaginatedPosts } from "@/lib/blog";
-import { Section } from "../components/Section";
+import { AnimatedSection } from "../components/AnimatedSection";
 
 type Props = {
     searchParams: Promise<{ page?: string }>;
@@ -17,67 +17,80 @@ export default async function BlogPage({ searchParams }: Props) {
     const { posts, totalPages } = await getPaginatedPosts(currentPage, POSTS_PER_PAGE);
 
     return (
-        <div className="max-w-4xl mx-auto px-6">
-            <Section>
-                <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
-                    <ArrowLeft className="w-4 h-4 mr-2" />
-                    Back to home
-                </Link>
+        <main className="py-20">
+            <div className="max-w-4xl mx-auto px-6">
+                <AnimatedSection>
+                    <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm group">
+                        <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                        Back to home
+                    </Link>
 
-                <h1 className="text-4xl md:text-5xl font-medium mb-4">Blog</h1>
-                <p className="text-xl text-muted-foreground max-w-2xl mb-16 leading-relaxed">
-                    Thoughts on web development, technology, and building great products.
-                </p>
+                    <h1 className="text-5xl md:text-6xl font-medium mb-6 tracking-tight text-gradient">Blog</h1>
+                    <p className="text-xl text-muted-foreground max-w-2xl mb-20 leading-relaxed">
+                        Thoughts on web development, technology, and building great products.
+                    </p>
+                </AnimatedSection>
 
-                <div className="space-y-12">
+                <div className="space-y-16">
                     {posts.length > 0 ? (
-                        posts.map((post) => (
-                            <Link key={post.id} href={`/blog/${post.id}`} className="block group">
-                                <article className="space-y-4">
-                                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                                        <div className="flex items-center gap-1">
-                                            <Calendar className="w-4 h-4" />
-                                            {new Date(post.date).toLocaleDateString('en-US', {
-                                                year: 'numeric',
-                                                month: 'long',
-                                                day: 'numeric'
-                                            })}
+                        posts.map((post, index) => (
+                            <AnimatedSection key={post.id} delay={index * 0.1}>
+                                <Link href={`/blog/${post.id}`} className="block group">
+                                    <article className="space-y-4">
+                                        <div className="flex items-center gap-6 text-sm text-muted-foreground">
+                                            <div className="flex items-center gap-2">
+                                                <Calendar className="w-4 h-4" />
+                                                {new Date(post.date).toLocaleDateString('en-US', {
+                                                    year: 'numeric',
+                                                    month: 'long',
+                                                    day: 'numeric'
+                                                })}
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <Clock className="w-4 h-4" />
+                                                {post.readTime}
+                                            </div>
                                         </div>
-                                        <div className="flex items-center gap-1">
-                                            <Clock className="w-4 h-4" />
-                                            {post.readTime}
+
+                                        <h2 className="text-3xl font-medium group-hover:text-primary transition-colors tracking-tight">
+                                            {post.title}
+                                        </h2>
+
+                                        <p className="text-muted-foreground leading-relaxed max-w-3xl text-lg">
+                                            {post.excerpt}
+                                        </p>
+
+                                        <div className="flex items-center justify-between pt-2">
+                                            <div className="flex flex-wrap gap-2">
+                                                {post.tags.map((tag) => (
+                                                    <span key={tag} className="text-[10px] uppercase tracking-widest px-2 py-1 bg-muted rounded-full text-muted-foreground border border-border/50">
+                                                        {tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                            <div className="flex items-center text-sm font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                                                Read more <ArrowRight className="ml-2 w-4 h-4" />
+                                            </div>
                                         </div>
-                                    </div>
-
-                                    <h2 className="text-2xl font-medium group-hover:text-muted-foreground transition-colors">
-                                        {post.title}
-                                    </h2>
-
-                                    <p className="text-muted-foreground leading-relaxed max-w-2xl">
-                                        {post.excerpt}
-                                    </p>
-
-                                    <div className="flex items-center gap-2">
-                                        {post.tags.map((tag) => (
-                                            <span key={tag} className="text-xs px-2 py-1 bg-muted rounded-md text-muted-foreground">
-                                                {tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                </article>
-                            </Link>
+                                    </article>
+                                </Link>
+                            </AnimatedSection>
                         ))
                     ) : (
                         <p className="text-muted-foreground">No posts found on this page.</p>
                     )}
                 </div>
 
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    baseUrl="/blog"
-                />
-            </Section>
-        </div>
+                <AnimatedSection delay={0.4}>
+                    <div className="mt-20 pt-10 border-t border-border/40">
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            baseUrl="/blog"
+                        />
+                    </div>
+                </AnimatedSection>
+            </div>
+        </main>
     );
 }
