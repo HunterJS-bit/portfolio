@@ -30,7 +30,7 @@ const projects = [
 
 const WorkPage = () => {
     return (
-        <div className="max-w-4xl mx-auto px-6 py-20">
+        <div className="max-w-4xl mx-auto px-6">
             <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to home

@@ -27,7 +27,7 @@ const moreWork = [
 export const Work = () => {
 
     return (
-        <section id="work" className="py-20">
+        <section id="work">
             <div className="max-w-4xl mx-auto px-6">
                 <Section>
                     <h2 className="text-2xl font-medium mb-12">more work</h2>
