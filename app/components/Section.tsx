@@ -13,8 +13,7 @@ export const Section = ({ children, delay = 0, className = "" }: SectionProps) =
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{
                 duration: 0.8,
                 delay: delay,

@@ -29,11 +29,15 @@ const moreWork = [
     }
 ];
 
-export const Work = () => {
+interface WorkProps {
+    delay?: number;
+}
+
+export const Work = ({ delay = 0 }: WorkProps) => {
     return (
         <section id="work" className="py-20">
             <div className="max-w-4xl mx-auto px-6">
-                <Section>
+                <Section delay={delay}>
                     <div className="flex items-end justify-between mb-12">
                         <div>
                             <h2 className="text-3xl font-medium tracking-tight mb-2">Selected Work</h2>

@@ -6,14 +6,8 @@ import { AnimatedSection } from './components/AnimatedSection';
 export default function Home() {
   return (
     <main className="flex flex-col gap-20 py-20">
-      <AnimatedSection>
-        <About />
-      </AnimatedSection>
-
-      <AnimatedSection delay={0.2}>
-        <Work />
-      </AnimatedSection>
-
+      <About />
+      <Work delay={0.2} />
       <AnimatedSection delay={0.4}>
         <Contact />
       </AnimatedSection>

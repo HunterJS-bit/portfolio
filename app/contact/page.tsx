@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { submitContactForm, ContactState } from "./actions";
 import { ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
 import Link from "next/link";
-import { Section } from "../components/Section";
+import { AnimatedSection } from "../components/AnimatedSection";
 
 const initialState: ContactState = {};
 
@@ -13,7 +13,7 @@ const ContactPage = () => {
 
     return (
         <div className="max-w-4xl mx-auto px-6">
-            <Section>
+            <AnimatedSection>
                 <Link href="/" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Back to home
@@ -130,7 +130,7 @@ const ContactPage = () => {
                         </form>
                     )}
                 </div>
-            </Section>
+            </AnimatedSection>
         </div>
     );
 }

@@ -1,10 +1,14 @@
 import { Section } from "./Section";
 
-export const About = () => {
+interface AboutProps {
+  delay?: number;
+}
+
+export const About = ({ delay = 0 }: AboutProps) => {
   return (
     <section id="about" className="pb-20">
       <div className="max-w-4xl mx-auto px-6">
-        <Section className="max-w-3xl">
+        <Section className="max-w-3xl" delay={delay}>
           <h1 className="text-5xl md:text-6xl font-medium mb-10 leading-[1.1] tracking-tight text-gradient">
             Software engineer designing tools for thought.
           </h1>
