@@ -34,6 +34,8 @@ export const Work = ({ delay = 0 }: WorkProps) => {
                                             alt={project.title}
                                             fill
                                             className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            quality={90}
                                         />
                                         <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
                                     </div>
