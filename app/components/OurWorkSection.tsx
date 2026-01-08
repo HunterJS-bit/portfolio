@@ -2,32 +2,7 @@ import Image from "next/image";
 import { AnimatedSection } from "./AnimatedSection";
 import { ArrowUpRight } from "lucide-react";
 
-const moreWork = [
-    {
-        title: "Found Money",
-        year: "2016",
-        company: "Acorns",
-        image: "/found_money.png",
-        link: "/work/found-money",
-        description: "A micro-investing platform that helps people save for their future."
-    },
-    {
-        title: "Foundry",
-        year: "2017 - 2019",
-        company: "Palantir",
-        image: "/foundry.png",
-        link: "/work/foundry",
-        description: "An enterprise data platform for integrating, managing, and securing data."
-    },
-    {
-        title: "Data Visualization",
-        year: "2020",
-        company: "Notion",
-        image: "/data_viz.png",
-        link: "/work/data-visualization",
-        description: "Interactive tools for visualizing complex data sets within Notion."
-    }
-];
+import { projects } from "@/lib/projects";
 
 interface WorkProps {
     delay?: number;
@@ -46,10 +21,10 @@ export const Work = ({ delay = 0 }: WorkProps) => {
                     </div>
 
                     <div className="grid gap-16">
-                        {moreWork.map((project, index) => (
+                        {projects.map((project, index) => (
                             <a
                                 key={index}
-                                href={project.link}
+                                href={`/work/${project.id}`}
                                 className="group block relative"
                             >
                                 <div className="grid md:grid-cols-2 gap-8 items-center">
