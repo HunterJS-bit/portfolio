@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Pagination } from "../components/Pagination";
 import { getPaginatedPosts } from "@/lib/blog";
-import { AnimatedSection } from "../components/AnimatedSection";
+import { DynamicAnimatedSection as AnimatedSection } from "../components/DynamicAnimatedSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

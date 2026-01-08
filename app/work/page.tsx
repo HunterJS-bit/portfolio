@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { AnimatedSection } from "../components/AnimatedSection";
+import { DynamicAnimatedSection as AnimatedSection } from "../components/DynamicAnimatedSection";
 
 import { projects } from "@/lib/projects";
 import { Metadata } from "next";

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { AnimatedSection } from "../components/AnimatedSection";
+import { DynamicAnimatedSection as AnimatedSection } from "../components/DynamicAnimatedSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

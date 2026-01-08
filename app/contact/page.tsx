@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import Link from "next/link";
 import { ArrowLeft, CheckCircle2, AlertCircle } from "lucide-react";
 import { submitContactForm, ContactState } from "./actions";
-import { AnimatedSection } from "../components/AnimatedSection";
+import { DynamicAnimatedSection as AnimatedSection } from "../components/DynamicAnimatedSection";
 
 const initialState: ContactState = {};
 

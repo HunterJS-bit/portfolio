@@ -1,7 +1,7 @@
 import { About } from '@/app/components/AboutSection';
-import { Contact } from '@/app/components/Contact';
+import { DynamicContact as Contact } from '@/app/components/DynamicContact';
 import { LatestPostsSection } from './components/LatestPostsSection';
-import { AnimatedSection } from './components/AnimatedSection';
+import { DynamicAnimatedSection as AnimatedSection } from './components/DynamicAnimatedSection';
 
 export default function Home() {
   return (
