@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ThemeToggle } from './ThemeToggle';
@@ -16,6 +17,7 @@ const navLinks = [
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const pathname = usePathname();
 
   // Prevent scrolling when menu is open
   useEffect(() => {
@@ -28,6 +30,11 @@ export const Navigation = () => {
       document.body.style.overflow = 'unset';
     };
   }, [isOpen]);
+
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
+  };
 
   return (
     <nav className={`fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 border-b border-border/40 ${isOpen ? 'menu-open' : ''}`}>
@@ -46,9 +53,20 @@ export const Navigation = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  className={`text-sm transition-colors relative ${isActive(link.href)
+                      ? 'text-foreground font-medium'
+                      : 'text-muted-foreground hover:text-foreground'
+                    }`}
                 >
                   {link.label}
+                  {isActive(link.href) && (
+                    <motion.div
+                      layoutId="activeIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-px bg-foreground"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
                 </Link>
               ))}
             </div>
@@ -96,7 +114,10 @@ export const Navigation = () => {
                 >
                   <Link
                     href={link.href}
-                    className="text-3xl font-medium hover:text-muted-foreground transition-colors"
+                    className={`text-3xl font-medium transition-colors ${isActive(link.href)
+                        ? 'text-foreground'
+                        : 'hover:text-muted-foreground'
+                      }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
