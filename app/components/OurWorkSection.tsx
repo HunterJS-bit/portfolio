@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Section } from "./Section";
+import { AnimatedSection } from "./AnimatedSection";
 import { ArrowUpRight } from "lucide-react";
 
 const moreWork = [
@@ -37,7 +37,7 @@ export const Work = ({ delay = 0 }: WorkProps) => {
     return (
         <section id="work" className="py-20">
             <div className="max-w-4xl mx-auto px-6">
-                <Section delay={delay}>
+                <AnimatedSection delay={delay}>
                     <div className="flex items-end justify-between mb-12">
                         <div>
                             <h2 className="text-3xl font-medium tracking-tight mb-2">Selected Work</h2>
@@ -80,7 +80,7 @@ export const Work = ({ delay = 0 }: WorkProps) => {
                             </a>
                         ))}
                     </div>
-                </Section>
+                </AnimatedSection>
             </div>
         </section>
     )
