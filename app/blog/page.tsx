@@ -3,6 +3,12 @@ import { Calendar, Clock, ArrowLeft, ArrowRight } from "lucide-react";
 import { Pagination } from "../components/Pagination";
 import { getPaginatedPosts } from "@/lib/blog";
 import { AnimatedSection } from "../components/AnimatedSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Blog",
+    description: "Thoughts on web development, technology, and building great products.",
+};
 
 type Props = {
     searchParams: Promise<{ page?: string }>;

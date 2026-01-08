@@ -3,32 +3,13 @@ import Image from "next/image";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
 
-const projects = [
-    {
-        title: "Found Money",
-        year: "2016",
-        company: "Acorns",
-        image: "/found_money.png",
-        description: "A premium mobile app interface for a financial savings app. Built tools for automated savings and investment tracking.",
-        link: "/work/found-money"
-    },
-    {
-        title: "Foundry",
-        year: "2017 - 2019",
-        company: "Palantir",
-        image: "/foundry.png",
-        description: "Sophisticated enterprise data analytics platform. Designed complex data visualizations and network graphs for global operations.",
-        link: "/work/foundry"
-    },
-    {
-        title: "Data Visualization",
-        year: "2020",
-        company: "Notion",
-        image: "/data_viz.png",
-        description: "Minimalist data visualization tool integrated into a Notion-like workspace. Focused on elegant charts and clean typography.",
-        link: "/work/data-visualization"
-    }
-];
+import { projects } from "@/lib/projects";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "Work",
+    description: "A selection of projects I've worked on over the years, ranging from financial tools to enterprise data platforms.",
+};
 
 const WorkPage = () => {
     return (
@@ -73,7 +54,7 @@ const WorkPage = () => {
                                         {project.description}
                                     </p>
                                     <Link
-                                        href={project.link}
+                                        href={`/work/${project.id}`}
                                         className="inline-flex items-center text-sm font-medium text-foreground hover:text-primary transition-colors group/link"
                                     >
                                         View Case Study

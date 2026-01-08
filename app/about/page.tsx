@@ -2,6 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { AnimatedSection } from "../components/AnimatedSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+    title: "About",
+    description: "Learn more about John Doe, a software engineer designing tools for thought and building scalable frontend architectures.",
+};
 
 const AboutPage = () => {
     return (
@@ -42,7 +48,7 @@ const AboutPage = () => {
                 </div>
 
                 <AnimatedSection delay={0.3}>
-                    <div className="prose prose-lg dark:prose-invert max-w-none prose-p:text-muted-foreground prose-p:leading-relaxed">
+                    <div className="prose prose-lg dark:prose-invert max-w-none prose-p:text-muted-foreground prose-p:leading-relaxed mb-20">
                         <p>
                             Maecenas dictum molestie urna, at auctor urna laoreet nec. Fusce vel eros dui. Maecenas at nibh blandit, hendrerit est eget, laoreet nisi.
                             Integer quis viverra nunc. Fusce ut urna varius, laoreet quam non, lacinia nisl. Sed sed egestas nisl. Mauris interdum, nulla vel pulvinar semper, est est porttitor diam,
