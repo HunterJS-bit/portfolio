@@ -37,6 +37,8 @@ const WorkPage = () => {
                                         alt={project.title}
                                         fill
                                         className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                        sizes="(max-width: 768px) 100vw, 50vw"
+                                        quality={90}
                                     />
                                     <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
                                 </div>

@@ -30,6 +30,8 @@ const AboutPage = () => {
                                 alt="John Doe"
                                 fill
                                 className="object-cover"
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                quality={90}
                             />
                         </div>
                     </AnimatedSection>

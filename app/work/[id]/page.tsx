@@ -62,6 +62,8 @@ export default async function ProjectPage({ params }: Props) {
                             fill
                             className="object-cover"
                             priority
+                            sizes="(max-width: 1024px) 100vw, 1024px"
+                            quality={95}
                         />
                     </div>
                 </AnimatedSection>
