@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { ThemeProvider } from "next-themes";
 import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
@@ -10,6 +10,8 @@ const openSans = Roboto({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-opensans',
+  weight: ['400', '500', '600'],
+  preload: true,
 })
 
 //👇 Configure the object for our second font
@@ -17,8 +19,19 @@ const robotoMono = Nunito({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto-mono',
+  weight: ['400', '500'],
+  preload: true,
 })
 
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0d0d0d' },
+  ],
+}
 
 export const metadata: Metadata = {
   title: {
