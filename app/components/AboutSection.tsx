@@ -17,13 +17,13 @@ export const About = ({ delay = 0 }: AboutProps) => {
             <p className="text-xl leading-relaxed">
               I&apos;m currently building at{" "}
               <a
-                href="https://clarivate.com"
+                href="https://www.datadoghq.com"
                 className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground transition-all"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Clarivate
-              </a>. Previously, I&apos;ve helped organizations make sense of complex information at Nokia and founded social platforms for discovery.
+                Datadog
+              </a>. Helped organizations implement clean architecture and effective solutions. I'm also building open‑source projects to experiment, learn, and contribute back to the community
             </p>
 
             <div className="grid sm:grid-cols-2 gap-12 pt-4">
@@ -31,7 +31,7 @@ export const About = ({ delay = 0 }: AboutProps) => {
                 <h3 className="text-sm font-medium uppercase tracking-widest text-foreground/50">Experience</h3>
                 <ul className="space-y-6">
                   <li className="group">
-                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">Clarivate</div>
+                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">DataDog</div>
                     <div className="text-sm">Software Engineer • Present</div>
                   </li>
                   <li className="group">
@@ -39,8 +39,8 @@ export const About = ({ delay = 0 }: AboutProps) => {
                     <div className="text-sm">Full Stack Developer • 2021 — 2023</div>
                   </li>
                   <li className="group">
-                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">Scout</div>
-                    <div className="text-sm">Founder • 2019 — 2021</div>
+                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">OMV</div>
+                    <div className="text-sm">JavaScript Developer • 2017 — 2021</div>
                   </li>
                 </ul>
               </div>
@@ -49,11 +49,11 @@ export const About = ({ delay = 0 }: AboutProps) => {
                 <ul className="space-y-6">
                   <li className="group">
                     <div className="text-foreground font-medium group-hover:text-primary transition-colors">Product Design</div>
-                    <div className="text-sm">Creating intuitive interfaces for complex workflows.</div>
+                    <div className="text-sm">Creating cloud native solutions for complex workflows.</div>
                   </li>
                   <li className="group">
-                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">Frontend Architecture</div>
-                    <div className="text-sm">Building scalable, performant web applications.</div>
+                    <div className="text-foreground font-medium group-hover:text-primary transition-colors">Distributed Systems</div>
+                    <div className="text-sm">Building fault‑tolerant microservices and event‑driven architectures</div>
                   </li>
                 </ul>
               </div>

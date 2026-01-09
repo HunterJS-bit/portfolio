@@ -47,7 +47,7 @@ export const Contact = () => {
             <div>
               <h2 className="text-4xl font-medium tracking-tight mb-6 text-gradient">Let&apos;s work together.</h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-10">
-                I&apos;m always open to discussing new projects, creative ideas or opportunities to be part of your visions.
+                I welcome conversations about projects, ideas, and opportunities where I can contribute to shared success.
               </p>
 
               <div className="space-y-6">
