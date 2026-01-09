@@ -35,15 +35,15 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: {
-    default: "John Doe — Software Engineer",
-    template: "%s | John Doe"
+    default: "Marko — Software Engineer",
+    template: "%s | Marko"
   },
   description: "Software engineer designing tools for thought. Focused on product design, frontend architecture, and building scalable web applications.",
   openGraph: {
-    title: "John Doe — Software Engineer",
+    title: "Marko — Software Engineer",
     description: "Software engineer designing tools for thought.",
     url: "https://johndoe.com",
-    siteName: "John Doe Portfolio",
+    siteName: "Marko Portfolio",
     images: [
       {
         url: "/og-image.png",
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "John Doe — Software Engineer",
+    title: "Marko — Software Engineer",
     description: "Software engineer designing tools for thought.",
-    creator: "@johndoe",
+    creator: "@markom",
     images: ["/og-image.png"],
   },
   robots: {

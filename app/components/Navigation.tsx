@@ -42,7 +42,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-lg font-medium tracking-tight">
             <Link href="/" className="hover:text-muted-foreground transition-colors" onClick={() => setIsOpen(false)}>
-              marko m
+              marko
             </Link>
           </h1>
 
@@ -100,11 +100,11 @@ export const Navigation = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 bg-background/95 backdrop-blur-xl"
+              className="absolute inset-0 bg-background/95 backdrop-blur-xl h-screen"
               onClick={() => setIsOpen(false)}
             />
 
-            <nav className="relative flex flex-col items-center justify-center h-full gap-8 pb-32">
+            <nav className="relative flex flex-col items-center justify-center h-full gap-8 pb-32 h-screen">
               {navLinks.map((link, index) => (
                 <motion.div
                   key={link.href}
