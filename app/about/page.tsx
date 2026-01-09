@@ -28,7 +28,7 @@ const AboutPage = () => {
                     <AnimatedSection delay={0.2}>
                         <div className="prose prose-lg dark:prose-invert max-w-none space-y-8">
                             <p className="text-xl text-foreground leading-relaxed">
-                                I build, maintain, and ship software. These days, I work at{" "}
+                                Hello, I&apos;m Marko. I&apos;m a software engineer at{" "}
                                 <a
                                     href="https://www.datadoghq.com"
                                     className="text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground transition-all"
@@ -37,7 +37,7 @@ const AboutPage = () => {
                                 >
                                     Datadog
                                 </a>
-                                , helping teams monitor and understand their systems.
+                                . This is my digital garden where I share what I&apos;m learning, building, and thinking about.
                             </p>
                             <div className="relative group rounded-2xl overflow-hidden border border-border/50 bg-muted max-h-[400px]">
                                 <Image

@@ -42,7 +42,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-lg font-medium tracking-tight">
             <Link href="/" className="hover:text-muted-foreground transition-colors" onClick={() => setIsOpen(false)}>
-              john doe
+              marko m
             </Link>
           </h1>
 
@@ -54,8 +54,8 @@ export const Navigation = () => {
                   key={link.href}
                   href={link.href}
                   className={`text-sm transition-colors relative ${isActive(link.href)
-                      ? 'text-foreground font-medium'
-                      : 'text-muted-foreground hover:text-foreground'
+                    ? 'text-foreground font-medium'
+                    : 'text-muted-foreground hover:text-foreground'
                     }`}
                 >
                   {link.label}
@@ -115,8 +115,8 @@ export const Navigation = () => {
                   <Link
                     href={link.href}
                     className={`text-3xl font-medium transition-colors ${isActive(link.href)
-                        ? 'text-foreground'
-                        : 'hover:text-muted-foreground'
+                      ? 'text-foreground'
+                      : 'hover:text-muted-foreground'
                       }`}
                     onClick={() => setIsOpen(false)}
                   >
