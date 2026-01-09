@@ -1,4 +1,4 @@
-import { getAllPosts } from "@/lib/blog";
+import { getPaginatedPosts } from "@/lib/blog";
 import { AnimatedSection } from "./AnimatedSection";
 import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Link from "next/link";
@@ -8,8 +8,7 @@ interface LatestPostsSectionProps {
 }
 
 export const LatestPostsSection = async ({ delay = 0 }: LatestPostsSectionProps) => {
-    const allPosts = await getAllPosts();
-    const latestPosts = allPosts.slice(0, 3);
+    const { posts: latestPosts } = await getPaginatedPosts(1, 3);
 
     return (
         <section id="latest-posts" className="py-20">
