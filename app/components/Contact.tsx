@@ -52,24 +52,22 @@ export const Contact = () => {
               </p>
 
               <div className="space-y-6">
-                <a href="#" className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <Mail size={18} />
-                  </div>
-                  <span className="text-sm font-medium"><Link href="mailto:markomiljkovic2@gmail.com" rel="noopener noreferrer" target="_blank">marko@gmail.com</Link></span>
-                </a>
-                <a href="#" className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <Github size={18} />
-                  </div>
-                  <span className="text-sm font-medium"><Link href="https://github.com/HunterJS-bit" rel="noopener noreferrer" target="_blank">github.com/marko</Link></span>
-                </a>
-                <a href="#" className="flex items-center gap-4 group">
-                  <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                    <Linkedin size={18} />
-                  </div>
-                  <span className="text-sm font-medium"><Link href="https://www.linkedin.com/in/%D0%BC%D0%B0%D1%80%D0%BA%D0%BE-%D0%BC%D0%B8%D1%99%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B-b34ab111a/" rel="noopener noreferrer" target="_blank">linkedin.com/marko</Link></span>
-                </a>
+
+                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <Mail size={18} />
+                </div>
+                <span className="text-sm font-medium"><Link href="mailto:markomiljkovic2@gmail.com" rel="noopener noreferrer" target="_blank">marko@gmail.com</Link></span>
+
+                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <Github size={18} />
+                </div>
+                <span className="text-sm font-medium"><Link href="https://github.com/HunterJS-bit" rel="noopener noreferrer" target="_blank">github.com/marko</Link></span>
+
+                <div className="w-10 h-10 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                  <Linkedin size={18} />
+                </div>
+                <span className="text-sm font-medium"><Link href="https://www.linkedin.com/in/%D0%BC%D0%B0%D1%80%D0%BA%D0%BE-%D0%BC%D0%B8%D1%99%D0%BA%D0%BE%D0%B2%D0%B8%D1%9B-b34ab111a/" rel="noopener noreferrer" target="_blank">linkedin.com/marko</Link></span>
+
               </div>
             </div>
 

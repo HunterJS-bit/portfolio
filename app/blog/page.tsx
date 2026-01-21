@@ -7,7 +7,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "Blog",
-    description: "Thoughts on web development, technology, and building great products.",
+    description: "My thoughts on web development, technology, and products.",
 };
 
 type Props = {
