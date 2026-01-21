@@ -53,7 +53,7 @@ const ContactPage = () => {
                                             id="firstName"
                                             name="firstName"
                                             type="text"
-                                            placeholder="Jane"
+                                            placeholder="Name"
                                             className={`w-full bg-muted/50 border ${state.errors?.firstName ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
                                         />
                                         {state.errors?.firstName && (
@@ -70,7 +70,7 @@ const ContactPage = () => {
                                             id="lastName"
                                             name="lastName"
                                             type="text"
-                                            placeholder="Doe"
+                                            placeholder="Last Name"
                                             className={`w-full bg-muted/50 border ${state.errors?.lastName ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
                                         />
                                         {state.errors?.lastName && (
@@ -89,7 +89,7 @@ const ContactPage = () => {
                                         id="email"
                                         name="email"
                                         type="email"
-                                        placeholder="jane@example.com"
+                                        placeholder="Email"
                                         className={`w-full bg-muted/50 border ${state.errors?.email ? 'border-red-500' : 'border-border'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-foreground/10 transition-all`}
                                     />
                                     {state.errors?.email && (

@@ -28,19 +28,24 @@ export const Work = ({ delay = 0 }: WorkProps) => {
                                 className="group block relative"
                             >
                                 <div className="grid md:grid-cols-2 gap-8 items-center">
-                                    <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-muted border border-border/50">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            quality={90}
-                                        />
-                                        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+                                    <div>
+                                        <div className="relative aspect-[16/10] overflow-hidden rounded-xl bg-muted border border-border/50">
+                                            <Image
+                                                src={project.image}
+                                                alt={project.title}
+                                                fill
+                                                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                                                sizes="(max-width: 768px) 100vw, 50vw"
+                                                quality={90}
+                                            />
+                                            <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-500" />
+                                        </div>
+                                        <p className="text-[10px] text-muted-foreground/60 mt-2 text-right uppercase tracking-widest font-mono">
+                                            * Image does not represent actual project
+                                        </p>
                                     </div>
                                     <div className="flex flex-col justify-center">
-                                        <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3">
+                                        <div className="flex items-center gap-3 text-sm text-muted-foreground mb-3 font-mono">
                                             <span className="font-medium text-foreground/80">{project.company}</span>
                                             <span>•</span>
                                             <span>{project.year}</span>
