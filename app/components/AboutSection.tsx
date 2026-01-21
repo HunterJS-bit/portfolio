@@ -23,24 +23,27 @@ export const About = ({ delay = 0 }: AboutProps) => {
                 rel="noopener noreferrer"
               >
                 Datadog
-              </a>. Helped organizations implement clean architecture and effective solutions. I'm also building open‑source projects to experiment, learn, and contribute back to the community
+              </a>. Helped organizations implement clean architecture and effective solutions. I&apos;m also building open‑source projects to experiment, learn, and contribute back to the community
             </p>
 
             <div className="grid sm:grid-cols-2 gap-12 pt-4">
               <div className="space-y-4">
                 <h3 className="text-sm font-medium uppercase tracking-widest text-foreground/50">Experience</h3>
-                <ul className="space-y-6">
-                  <li className="group">
+                <ul className="space-y-8 border-l border-border/50 ml-2 pl-6 relative">
+                  <li className="group relative">
+                    <div className="absolute -left-[29px] top-2 w-3 h-3 rounded-full bg-primary/20 border border-primary group-hover:bg-primary transition-colors animate-pulse" />
                     <div className="text-foreground font-medium group-hover:text-primary transition-colors">DataDog</div>
-                    <div className="text-sm">Software Engineer • Present</div>
+                    <div className="text-sm text-muted-foreground font-mono mt-1">Software Engineer • Present</div>
                   </li>
-                  <li className="group">
+                  <li className="group relative">
+                    <div className="absolute -left-[29px] top-2 w-3 h-3 rounded-full bg-muted-foreground/20 border border-muted-foreground/50 group-hover:border-primary group-hover:bg-primary/50 transition-colors" />
                     <div className="text-foreground font-medium group-hover:text-primary transition-colors">Nokia</div>
-                    <div className="text-sm">Full Stack Developer • 2021 — 2023</div>
+                    <div className="text-sm text-muted-foreground font-mono mt-1">Full Stack Developer • 2021 — 2023</div>
                   </li>
-                  <li className="group">
+                  <li className="group relative">
+                    <div className="absolute -left-[29px] top-2 w-3 h-3 rounded-full bg-muted-foreground/20 border border-muted-foreground/50 group-hover:border-primary group-hover:bg-primary/50 transition-colors" />
                     <div className="text-foreground font-medium group-hover:text-primary transition-colors">OMV</div>
-                    <div className="text-sm">JavaScript Developer • 2017 — 2021</div>
+                    <div className="text-sm text-muted-foreground font-mono mt-1">JavaScript Developer • 2017 — 2021</div>
                   </li>
                 </ul>
               </div>
