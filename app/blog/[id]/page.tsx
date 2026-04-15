@@ -3,10 +3,37 @@ import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { Metadata } from "next";
 
 type Props = {
     params: Promise<{ id: string }>;
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+    const { id } = await params;
+    const post = await getPostById(id);
+
+    if (!post) {
+        return { title: "Post Not Found" };
+    }
+
+    return {
+        title: post.title,
+        description: post.excerpt,
+        openGraph: {
+            title: post.title,
+            description: post.excerpt,
+            type: "article",
+            publishedTime: post.date,
+            tags: post.tags,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: post.title,
+            description: post.excerpt,
+        },
+    };
+}
 
 export async function generateStaticParams() {
     const posts = await getAllPosts();
