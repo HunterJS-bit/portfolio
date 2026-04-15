@@ -2,7 +2,7 @@ import { getAllPosts } from '@/lib/blog';
 import { projects } from '@/lib/projects';
 
 export default async function sitemap() {
-    const baseUrl = 'https://johndoe.com';
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
 
     // Static pages
     const staticPages = [

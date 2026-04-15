@@ -33,16 +33,22 @@ export const viewport: Viewport = {
   ],
 }
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Marko — Software Engineer",
     template: "%s | Marko"
   },
   description: "Software engineer designing tools for thought. Focused on product design, frontend architecture, and building scalable web applications.",
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: "Marko — Software Engineer",
     description: "Software engineer designing tools for thought.",
-    url: "https://johndoe.com",
+    url: SITE_URL,
     siteName: "Marko Portfolio",
     images: [
       {
