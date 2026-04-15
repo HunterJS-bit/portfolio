@@ -28,8 +28,36 @@ export default async function ProjectPage({ params }: Props) {
         notFound();
     }
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        name: project.title,
+        description: project.description,
+        url: `${siteUrl}/work/${id}`,
+        author: {
+            '@type': 'Person',
+            name: 'Marko',
+            url: siteUrl,
+        },
+        about: {
+            '@type': 'CreativeWork',
+            name: project.title,
+            description: project.longDescription,
+            creator: {
+                '@type': 'Person',
+                name: 'Marko',
+            },
+        },
+    };
+
     return (
         <main className="py-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <div className="max-w-4xl mx-auto px-6">
                 <AnimatedSection>
                     <Link href="/work" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm group">

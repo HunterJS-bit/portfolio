@@ -51,8 +51,29 @@ export default async function SingleBlogPage({ params }: Props) {
         notFound();
     }
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
+
+    const jsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'BlogPosting',
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        author: {
+            '@type': 'Person',
+            name: 'Marko',
+            url: siteUrl,
+        },
+        url: `${siteUrl}/blog/${id}`,
+        keywords: post.tags.join(', '),
+    };
+
     return (
         <div className="max-w-3xl mx-auto px-6 py-20">
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+            />
             <Link href="/blog" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-12 text-sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to blog

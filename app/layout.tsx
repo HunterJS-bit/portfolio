@@ -80,6 +80,41 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@graph': [
+                {
+                  '@type': 'WebSite',
+                  '@id': `${SITE_URL}/#website`,
+                  url: SITE_URL,
+                  name: 'Marko Portfolio',
+                  description: 'Software engineer designing tools for thought.',
+                  inLanguage: 'en-US',
+                },
+                {
+                  '@type': 'Person',
+                  '@id': `${SITE_URL}/#person`,
+                  name: 'Marko',
+                  url: SITE_URL,
+                  jobTitle: 'Software Engineer',
+                  worksFor: {
+                    '@type': 'Organization',
+                    name: 'Datadog',
+                    url: 'https://www.datadoghq.com',
+                  },
+                  sameAs: [
+                    'https://twitter.com/markom',
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
+      </head>
       <body
         className={`${openSans.variable} ${robotoMono.variable}  antialiased min-h-screen flex flex-col`}
       >
