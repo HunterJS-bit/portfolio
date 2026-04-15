@@ -8,6 +8,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Blog",
     description: "My thoughts on web development, technology, and products.",
+    alternates: { canonical: '/blog' },
 };
 
 type Props = {

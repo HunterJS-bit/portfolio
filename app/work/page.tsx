@@ -9,6 +9,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
     title: "Work",
     description: "A selection of projects I've worked on over the years, ranging from financial tools to enterprise data platforms.",
+    alternates: { canonical: '/work' },
 };
 
 const WorkPage = () => {

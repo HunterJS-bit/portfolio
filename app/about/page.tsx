@@ -9,6 +9,7 @@ import aboutMeImg from "@/public/about_me.png";
 export const metadata: Metadata = {
     title: "About",
     description: "I build, maintain, and ship software. Currently working at Datadog, helping teams monitor and understand their systems.",
+    alternates: { canonical: '/about' },
 };
 
 const AboutPage = () => {
