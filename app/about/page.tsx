@@ -40,12 +40,13 @@ const AboutPage = () => {
                                 </a>
                                 . This is my digital garden where I share what I&apos;m learning, building, and thinking about.
                             </p>
-                            <div className="relative group rounded-2xl overflow-hidden border border-border/50 bg-muted max-h-[400px]">
+                            <div className="relative group rounded-2xl overflow-hidden border border-border/50 bg-muted h-[400px]">
                                 <Image
                                     src={aboutMeImg}
                                     alt="Marko"
+                                    fill
                                     placeholder="blur"
-                                    className="w-full h-full object-cover transition-all"
+                                    className="object-cover transition-all"
                                     priority
                                 />
                             </div>
