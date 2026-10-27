@@ -1,0 +1,113 @@
+name: Deploy Frontend as SSR to Dokploy
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'app/**'
+      - '.github/workflows/deploy-client-ssr.yml'
+  workflow_dispatch:
+
+jobs:
+  build-and-deploy:
+    environment: prod
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    env:
+      REGISTRY: ghcr.io
+      IMAGE_NAME: hunterjs-bit/portfolio-frontend
+      API_BASE_URL: ${{ secrets.API_BASE_URL }}
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd client
+          npm ci
+
+      - name: Build project
+        run: |
+          cd client
+          npm run build
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch
+            type=sha,prefix={{branch}}-
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./client
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      # - name: Update Environment Variables in Dokploy
+      #   env:
+      #     DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+      #     DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+      #     DOKPLOY_APP_ID: ${{ secrets.DOKPLOY_FRONTEND_APP_ID }}
+      #   run: |
+      #     if [ -n "$DOKPLOY_URL" ] && [ -n "$DOKPLOY_API_KEY" ] && [ -n "$DOKPLOY_APP_ID" ]; then
+      #       echo "Updating environment variables for application ID: $DOKPLOY_APP_ID"
+      #       curl --fail -X POST "${DOKPLOY_URL}/api/application.update" \
+      #         -H "accept: application/json" \
+      #         -H "x-api-key: $DOKPLOY_API_KEY" \
+      #         -H "Content-Type: application/json" \
+      #         -d "{
+      #           \"applicationId\": \"$DOKPLOY_APP_ID\",
+      #           \"env\": \"NUXT_PUBLIC_API_BASE=${{ vars.API_BASE_URL }}\nNUXT_PUBLIC_SITE_URL=${{ vars.SITE_URL }}\nNUXT_PUBLIC_DEBUG_ERRORS=${{ vars.DEBUG_ERRORS }}\nNODE_ENV=production\"
+      #         }"
+      #     else
+      #       echo "Error: DOKPLOY_URL, DOKPLOY_API_KEY, or DOKPLOY_APP_ID not configured"
+      #       exit 1
+      #     fi
+
+      # - name: Trigger Dokploy deployment
+        env:
+          DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+          DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+          DOKPLOY_APP_ID: ${{ secrets.DOKPLOY_FRONTEND_APP_ID }}
+        run: |
+          if [ -n "$DOKPLOY_URL" ] && [ -n "$DOKPLOY_API_KEY" ] && [ -n "$DOKPLOY_APP_ID" ]; then
+            echo "Triggering deployment for application ID: $DOKPLOY_APP_ID"
+            curl --fail --request POST \
+              --url "$DOKPLOY_URL/api/application.deploy" \
+              --header "x-api-key: $DOKPLOY_API_KEY" \
+              --header "Content-Type: application/json" \
+              --data "{\"applicationId\":\"$DOKPLOY_APP_ID\"}"
+          else
+            echo "Error: DOKPLOY_URL, DOKPLOY_API_KEY, or DOKPLOY_APP_ID not configured"
+            exit 1
+          fi
