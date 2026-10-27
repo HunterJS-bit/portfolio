@@ -3,7 +3,7 @@ name: Deploy Frontend as SSR to Dokploy
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - '**'
       - '.github/workflows/deploy-client.yml'
