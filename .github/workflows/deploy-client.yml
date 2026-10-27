@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - '**' 
+      - '**'
   workflow_dispatch:
 
 jobs:
@@ -15,12 +15,10 @@ jobs:
     permissions:
       contents: read
       packages: write
-
     env:
       REGISTRY: ghcr.io
       IMAGE_NAME: hunterjs-bit/portfolio-frontend
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
-
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -41,11 +39,10 @@ jobs:
           cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        run: 
-          npm ci
+        run: npm ci
 
       - name: Build project
-          npm run build
+        run: npm run build
 
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@v3
@@ -99,19 +96,19 @@ jobs:
       #     fi
 
       # - name: Trigger Dokploy deployment
-        # env:
-        #   DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
-        #   DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
-        #   DOKPLOY_APP_ID: ${{ secrets.DOKPLOY_FRONTEND_APP_ID }}
-        # run: |
-        #   if [ -n "$DOKPLOY_URL" ] && [ -n "$DOKPLOY_API_KEY" ] && [ -n "$DOKPLOY_APP_ID" ]; then
-        #     echo "Triggering deployment for application ID: $DOKPLOY_APP_ID"
-        #     curl --fail --request POST \
-        #       --url "$DOKPLOY_URL/api/application.deploy" \
-        #       --header "x-api-key: $DOKPLOY_API_KEY" \
-        #       --header "Content-Type: application/json" \
-        #       --data "{\"applicationId\":\"$DOKPLOY_APP_ID\"}"
-        #   else
-        #     echo "Error: DOKPLOY_URL, DOKPLOY_API_KEY, or DOKPLOY_APP_ID not configured"
-        #     exit 1
-        #   fi
+      #   env:
+      #     DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+      #     DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+      #     DOKPLOY_APP_ID: ${{ secrets.DOKPLOY_FRONTEND_APP_ID }}
+      #   run: |
+      #     if [ -n "$DOKPLOY_URL" ] && [ -n "$DOKPLOY_API_KEY" ] && [ -n "$DOKPLOY_APP_ID" ]; then
+      #       echo "Triggering deployment for application ID: $DOKPLOY_APP_ID"
+      #       curl --fail --request POST \
+      #         --url "$DOKPLOY_URL/api/application.deploy" \
+      #         --header "x-api-key: $DOKPLOY_API_KEY" \
+      #         --header "Content-Type: application/json" \
+      #         --data "{\"applicationId\":\"$DOKPLOY_APP_ID\"}"
+      #     else
+      #       echo "Error: DOKPLOY_URL, DOKPLOY_API_KEY, or DOKPLOY_APP_ID not configured"
+      #       exit 1
+      #     fi
