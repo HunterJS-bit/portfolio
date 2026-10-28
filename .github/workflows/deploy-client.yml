@@ -21,7 +21,7 @@ jobs:
       IMAGE_NAME: hunterjs-bit/portfolio-frontend
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
       PORT: '4004'
-      NEXT_PUBLIC_SITE_URL: 'markobuilds.dev'
+      NEXT_PUBLIC_SITE_URL: 'https://markobuilds.dev'
     steps:
       - name: Check out code
         uses: actions/checkout@v4
