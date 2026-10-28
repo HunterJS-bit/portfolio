@@ -21,6 +21,7 @@ jobs:
       IMAGE_NAME: hunterjs-bit/portfolio-frontend
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
       PORT: '4004'
+      NEXT_PUBLIC_SITE_URL: 'markobuilds.dev'
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -92,7 +93,7 @@ jobs:
               -H "Content-Type: application/json" \
               -d "{
                 \"applicationId\": \"$DOKPLOY_APP_ID\",
-                \"env\": \"\nNODE_ENV=production\"
+                \"env\": \"\nNODE_ENV=production\nNEXT_PUBLIC_SITE_URL=${{ env.NEXT_PUBLIC_SITE_URL }}\"
               }"
           else
             echo "Error: DOKPLOY_URL, DOKPLOY_API_KEY, or DOKPLOY_APP_ID not configured"

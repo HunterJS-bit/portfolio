@@ -42,7 +42,7 @@ export const Navigation = () => {
         <div className="flex items-center justify-between">
           <h1 className="text-lg font-medium tracking-tight">
             <Link href="/" className="hover:text-muted-foreground transition-colors" onClick={() => setIsOpen(false)}>
-              marko
+              markobuilds
             </Link>
           </h1>
 
