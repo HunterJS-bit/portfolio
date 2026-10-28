@@ -19,6 +19,7 @@ ENV HOST=0.0.0.0
 # Copy only the necessary files for production
 COPY --from=build /app/.next /app/.next
 COPY --from=build /app/public /app/public
+COPY --from=build /app/content /app/content
 COPY --from=build /app/package*.json /app/
 
 # Install only production dependencies
