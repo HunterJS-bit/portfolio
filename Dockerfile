@@ -11,8 +11,9 @@ RUN npm run build
 
 # Step 3: Production runner
 FROM base AS runner
+ARG PORT=4004
 ENV NODE_ENV=production
-ENV PORT=3000
+ENV PORT=${PORT}
 ENV HOST=0.0.0.0
 
 # Copy only the necessary files for production
@@ -24,7 +25,7 @@ COPY --from=build /app/package*.json /app/
 RUN npm ci --only=production
 
 # Expose the port for the application
-EXPOSE 3000
+EXPOSE ${PORT}
 
 # Command to run the Next.js application
 CMD ["npm", "start"]

@@ -20,6 +20,7 @@ jobs:
       REGISTRY: ghcr.io
       IMAGE_NAME: hunterjs-bit/portfolio-frontend
       API_BASE_URL: ${{ secrets.API_BASE_URL }}
+      PORT: '4004'
     steps:
       - name: Check out code
         uses: actions/checkout@v4
@@ -74,6 +75,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            PORT=${{ env.PORT }}
 
       - name: Update Environment Variables in Dokploy
         env:
