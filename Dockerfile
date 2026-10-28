@@ -16,17 +16,14 @@ ENV NODE_ENV=production
 ENV PORT=${PORT}
 ENV HOST=0.0.0.0
 
-# Copy only the necessary files for production
-COPY --from=build /app/.next /app/.next
-COPY --from=build /app/public /app/public
-COPY --from=build /app/content /app/content
-COPY --from=build /app/package*.json /app/
-
-# Install only production dependencies
-RUN npm ci --only=production
+# Copy only the necessary files for production (standalone mode)
+COPY --from=build /app/.next/standalone ./
+COPY --from=build /app/.next/static ./.next/static
+COPY --from=build /app/public ./public
+COPY --from=build /app/content ./content
 
 # Expose the port for the application
 EXPOSE ${PORT}
 
-# Command to run the Next.js application
-CMD ["npm", "start"]
+# Command to run the Next.js application (standalone mode)
+CMD ["node", "server.js"]
