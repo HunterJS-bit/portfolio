@@ -1,38 +1,58 @@
 ---
-title: 'Choosing a Home for My Hobby Projects'
+title: 'Choosing a Hosting provider for My Hobby Projects'
 date: '2026-11-02'
-excerpt: 'A curated list of tools and extensions that will boost your productivity.'
+excerpt: 'Choosing the right hosting provider for your hobby projects'
 readTime: '3 min read'
 tags: ['Productivity', 'Hosting']
 ---
 
-I wanted to start building more hobby projects, so I began looking for hosting that could run Node.js applications and databases such as PostgreSQL or MySQL.
+wanted to start building more hobby projects, so I began looking for hosting that could run Node.js applications and databases such as PostgreSQL or MySQL.
 
-I’d already tried Cloudflare Pages, which works well for static sites. But these projects needed something more: a server where I could run a Node.js application, connect it to a database, and have more control over the environment.
+I’d already tried [Cloudflare Pages](https://pages.cloudflare.com/), which works well for static sites. But these projects needed something more: a server where I could run a Node.js application, connect it to a database, and have more control over the environment.
 
-Because I’m in Europe, I wanted to find a provider with servers in or near the region. I started by searching Google, then found my way to Reddit’s VPS subreddit. Reading other users’ experiences helped me get a sense of which providers people commonly recommend. Hetzner and OVHcloud came up often, so I checked their offerings.
+Because I’m in Europe, I wanted to find a provider with servers in or near the region. I started by searching Google, then found my way to [Reddit’s VPS subreddit](https://www.reddit.com/r/vps/). Reading other users’ experiences helped me get a sense of which providers people commonly recommend. **Hetzner** and **OVHcloud** came up often, so I checked their offerings.
 
-What I considered
+---
+
+### What I Considered
+
+#### **Hetzner**
+
 Hetzner was my first choice, but when I checked, the servers I was considering were marked as unavailable. At the time I wrote this, the listed prices were:
 
-CX23: 2 Intel/AMD vCPUs, 4 GB RAM, 40 GB NVMe — €5.99/month
-CAX11: 2 Ampere vCPUs, 4 GB RAM, 40 GB NVMe — €6.49/month
-CX33: 4 Intel/AMD vCPUs, 8 GB RAM, 80 GB NVMe — €8.99/month
-CAX21: 4 Ampere vCPUs, 8 GB RAM, 80 GB NVMe — €10.99/month
-CX43: 8 Intel/AMD vCPUs, 16 GB RAM, 160 GB NVMe — €16.49/month
+| Plan  | Specs                                     | Price/Month |
+| ----- | ----------------------------------------- | ----------- |
+| CX23  | 2 Intel/AMD vCPUs, 4 GB RAM, 40 GB NVMe   | €5.99       |
+| CAX11 | 2 Ampere vCPUs, 4 GB RAM, 40 GB NVMe      | €6.49       |
+| CX33  | 4 Intel/AMD vCPUs, 8 GB RAM, 80 GB NVMe   | €8.99       |
+| CAX21 | 4 Ampere vCPUs, 8 GB RAM, 80 GB NVMe      | €10.99      |
+| CX43  | 8 Intel/AMD vCPUs, 16 GB RAM, 160 GB NVMe | €16.49      |
+
 Each was shown as currently unavailable on the site. These are the prices and availability I saw while writing, so they may change.
 
-I also looked at OVHcloud, but its prices seemed a little higher than I expected, and I couldn’t find the kind of entry-level server I was looking for. I considered AWS as well, but it looked a bit expensive for what I wanted to do. These are hobby projects, so I’d prefer not to spend too much before I know whether they’ll be useful or attract users. If one of the projects really takes off, I can always move it to a larger cloud setup later.
+#### **OVHcloud**
+
+I also looked at [OVHcloud](https://www.ovhcloud.com/), but its prices seemed a little higher than I expected, and I couldn’t find the kind of entry-level server I was looking for. I considered AWS as well, but it looked a bit expensive for what I wanted to do. These are hobby projects, so I’d prefer not to spend too much before I know whether they’ll be useful or attract users. If one of the projects really takes off, I can always move it to a larger cloud setup later.
+
+---
+
+### Other Hosting Options
 
 As I kept comparing providers, I found several other options:
 
-Scaleway Start-2-M-SATA: €15.19/month with a 12-month commitment. It includes an Intel C2750 processor, 8 GB of RAM, a 1 TB hard drive, and a 250 Mbps network connection.
-Netcup Root Server RS 500 G12.5: €10.86/month for a 12-month contract, with 2 dedicated AMD EPYC cores, 4 GB of RAM, and 64 GB of NVMe storage.
-Webdock: About $12.70/month for 2 vCPUs, 10 GB of RAM, 35 GB of NVMe storage, and 4 TB of outgoing traffic.
-HostHatch: From $12/month, with 4 AMD EPYC cores—1 dedicated and 3 shared—12 GB of RAM, 50 GB of NVMe storage, and 3 TB of traffic.
-Euronodes: An offer listed at €7.98/month, with 4 vCPUs, 8 GB of RAM, 150 GB of storage, and 30 TB of traffic.
-Why I chose Euronodes—for now
-For now, I’ve decided to go with Euronodes. The offer was inexpensive, and the company seemed stable based on what I found. From one of their posts, I understood that they have a small team of around eight core people, with the remaining data-center staff not on their payroll. That gave me a little more context about how they operate, although I’ll need to see how things work in practice.
+| Provider                                                  | Specs                                                                                 | Price/Month |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------- | ----------- |
+| [Scaleway Start-2-M-SATA](https://www.scaleway.com/)      | Intel C2750 processor, 8 GB RAM, 1 TB HDD, 250 Mbps network                           | €15.19      |
+| [Netcup Root Server RS 500 G12.5](https://www.netcup.eu/) | 2 dedicated AMD EPYC cores, 4 GB RAM, 64 GB NVMe storage                              | €10.86      |
+| [Webdock](https://webdock.io/)                            | 2 vCPUs, 10 GB RAM, 35 GB NVMe storage, 4 TB outgoing traffic                         | $12.70      |
+| [HostHatch](https://hosthatch.com/)                       | 4 AMD EPYC cores (1 dedicated, 3 shared), 12 GB RAM, 50 GB NVMe storage, 3 TB traffic | $12.00      |
+| [Euronodes](https://euronodes.com/)                       | 4 vCPUs, 8 GB RAM, 150 GB storage, 30 TB traffic                                      | €7.98       |
+
+---
+
+### Why I Chose Euronodes—for Now
+
+For now, I’ve decided to go with [Euronodes](https://euronodes.com/). The offer was inexpensive, and the company seemed stable based on what I found. From one of their posts, I understood that they have a small team of around eight core people, with the remaining data-center staff not on their payroll. That gave me a little more context about how they operate, although I’ll need to see how things work in practice.
 
 My current guess is that this server should be enough to run around four or five small Node.js applications, with those applications sharing a database server. That’s only an estimate, of course. How much the server can handle will depend on what the applications do and how much traffic they get, so I’ll have to see how it performs once everything is running.
 
