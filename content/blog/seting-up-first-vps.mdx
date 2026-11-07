@@ -1,0 +1,212 @@
+---
+title: 'Setting up mine first VPS"
+date: '2026-11-07'
+excerpt: 'Setting up VPS, going trough initial customizations'
+readTime: '4 min read'
+tags: ['Productivity', 'Hosting', 'Setup', 'VPS']
+---
+
+# What to Do First When You Get a VPS
+
+So, you’ve just got your first VPS. What should you do first?
+
+Before we get started, let’s cover the basics.
+
+## What Is a VPS?
+
+A **virtual private server (VPS)** is a virtual machine hosted on a physical server. It has its own operating system, allocated resources, and configuration, giving you more control than typical shared hosting.
+
+## 1. Create a Non-Root User
+
+It’s best not to use the `root` account for everyday tasks. Create a regular user instead:
+
+```bash
+sudo adduser your_new_user
+```
+
+Follow the prompts to set a password and provide any optional information.
+
+Add the new user to the sudo group so they can run administrative commands:
+
+```bash
+sudo usermod -aG sudo your_new_user
+```
+
+NOTE: This adds the user to the sudo group. Log out and back in as the new user for the group change to take effect.
+
+2. Secure SSH Access
+   Using SSH keys is generally safer than logging in with a password. First, make sure you can connect to your VPS with your public key using the new account. Keep your current SSH session open while testing a second connection, so you don’t accidentally lock yourself out.
+
+Once key-based login works, edit the SSH server configuration:
+
+```
+sudo nano /etc/ssh/sshd_config
+```
+
+Set or update these options:
+
+```
+PubkeyAuthentication yes
+PasswordAuthentication no
+```
+
+On some systems, SSH settings may be stored in files under /etc/ssh/sshd_config.d/. Check those files too, since their settings can override the main configuration.
+
+Validate the configuration and reload SSH:
+
+```
+sudo sshd -t
+sudo systemctl reload ssh
+```
+
+The service may be named sshd instead of ssh on some distributions. Confirm that you can open a new SSH session before closing your existing one.
+
+!Important: Make sure your SSH key works and that your provider’s firewall allows SSH before disabling password authentication.
+
+Here is the cleaned and properly formatted Markdown version of your text, with code blocks correctly enclosed and whitespace normalized.
+
+---
+
+### 3. Configure Your VPS Provider’s Firewall
+
+Many VPS providers offer a built-in firewall or network security-group feature. Use it to allow only the inbound traffic your server strictly needs—for example, SSH and, if you’re hosting a website, HTTP and HTTPS.
+
+> **Important:** Always make sure to allow your SSH port _before_ applying rules to your provider's firewall.
+
+Provider firewalls can reduce unwanted traffic reaching your VPS, but they do not replace the firewall running directly on the server itself.
+
+---
+
+### 4. Set Up UFW
+
+UFW (Uncomplicated Firewall) is a user-friendly tool for managing Linux firewall rules. It gives you precise control over which network traffic can reach your server.
+
+On Debian- and Ubuntu-based systems, install it with:
+
+```bash
+sudo apt update
+sudo apt install ufw -y
+
+```
+
+Check its status:
+
+```bash
+sudo ufw status
+
+```
+
+Before enabling UFW, allow SSH so you don’t lock yourself out of your server. If SSH uses its default port:
+
+```bash
+sudo ufw allow OpenSSH
+
+```
+
+If you use a custom SSH port, allow that specific port instead:
+
+```bash
+sudo ufw allow your_ssh_port/tcp
+
+```
+
+Allow any other services your server requires. For example, a standard web server commonly needs HTTP and HTTPS:
+
+```bash
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+```
+
+Once your rules are defined, enable UFW:
+
+```bash
+sudo ufw enable
+
+```
+
+Verify that the rules have been applied correctly:
+
+```bash
+sudo ufw status verbose
+
+```
+
+---
+
+### 5. Install and Configure Fail2ban
+
+If you check your server auth logs, you will likely see repeated brute-force login attempts from unfamiliar IP addresses. Fail2ban monitors log files and temporarily blocks IP addresses that generate too many failed authentication attempts.
+
+Install Fail2ban:
+
+```bash
+sudo apt update
+sudo apt install fail2ban -y
+
+```
+
+Enable and start the service so it runs automatically on boot:
+
+```bash
+sudo systemctl enable --now fail2ban
+
+```
+
+Rather than editing the package’s default configuration file directly (which can get overwritten during updates), create a local configuration file:
+
+```bash
+sudo nano /etc/fail2ban/jail.local
+
+```
+
+Add an SSH jail configuration block:
+
+```ini
+[sshd]
+enabled = true
+port = ssh
+maxretry = 5
+findtime = 10m
+bantime = 1h
+
+```
+
+_Note:_ The `port = ssh` setting uses the default SSH service name. If you use a custom SSH port, specify that port number or name instead.
+
+Save the file and restart Fail2ban to apply the changes:
+
+```bash
+sudo systemctl restart fail2ban
+
+```
+
+Check the service and SSH jail status to verify it's working:
+
+```bash
+sudo systemctl status fail2ban
+sudo fail2ban-client status sshd
+
+```
+
+If you ever need to manually unban an IP address, run:
+
+```bash
+sudo fail2ban-client set sshd unbanip <IP_ADDRESS>
+
+```
+
+---
+
+### That’s It!
+
+These steps establish a much safer baseline and starting point for your VPS. Always test SSH and firewall rule changes carefully in a secondary terminal session before closing your current connection, and remember to keep your software packages updated.
+
+See you in the next article!
+
+### Further Reading
+
+- [Ubuntu Server documentation](https://help.ubuntu.com/)
+- [OpenSSH server configuration](https://www.openssh.com/manual.html)
+- [UFW manual](https://help.ubuntu.com/community/UFW)
+- [Fail2ban documentation](https://www.fail2ban.org/)
