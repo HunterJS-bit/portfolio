@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @config "../tailwind.config.ts";
 
@@ -75,7 +75,7 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-roboto-mono), "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+    font-family: var(--font-roboto-mono), 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -99,6 +99,43 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-br from-foreground to-foreground/60;
   }
+}
+
+/* Custom prose table styling */
+.prose table {
+  @apply w-full border-collapse my-6;
+}
+
+.prose thead {
+  @apply border-b border-border;
+}
+
+.prose th {
+  @apply px-4 py-3 text-left font-semibold text-foreground;
+}
+
+.prose td {
+  @apply px-4 py-3 border-b border-border/50;
+}
+
+.prose tbody tr:last-child td {
+  @apply border-b-0;
+}
+
+.prose tbody tr:hover {
+  @apply bg-muted/50;
+}
+
+.dark .prose table {
+  @apply border-border;
+}
+
+.dark .prose th {
+  @apply text-foreground;
+}
+
+.dark .prose td {
+  @apply text-muted-foreground;
 }
 
 ::selection {
