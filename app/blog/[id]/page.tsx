@@ -2,7 +2,7 @@ import { getPostById, getAllPosts } from '@/lib/blog';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Link from 'next/link';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
+import { ArrowLeft, Calendar, Clock, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Metadata } from 'next';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
@@ -162,6 +162,42 @@ export default async function SingleBlogPage({ params }: Props) {
           }}
         />
       </article>
+
+      {/* Prev/Next Navigation */}
+      {(prevPost || nextPost) && (
+        <nav className="mt-16 pt-8 border-t border-border" aria-label="Blog navigation">
+          <div className="grid grid-cols-2 gap-4">
+            {prevPost && (
+              <Link
+                href={`/blog/${prevPost.id}`}
+                className="flex flex-col items-start text-left group"
+              >
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                  <ChevronLeft className="w-4 h-4" />
+                  Previous
+                </div>
+                <h3 className="font-medium group-hover:text-primary transition-colors">
+                  {prevPost.title}
+                </h3>
+              </Link>
+            )}
+            {nextPost && (
+              <Link
+                href={`/blog/${nextPost.id}`}
+                className="flex flex-col items-end text-right group"
+              >
+                <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                  Next
+                  <ChevronRight className="w-4 h-4" />
+                </div>
+                <h3 className="font-medium group-hover:text-primary transition-colors">
+                  {nextPost.title}
+                </h3>
+              </Link>
+            )}
+          </div>
+        </nav>
+      )}
 
       <footer className="mt-20 pt-8 border-t border-border">
         <div className="flex justify-between items-center">
