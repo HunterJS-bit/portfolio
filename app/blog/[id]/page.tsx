@@ -14,6 +14,7 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
   const post = await getPostById(id);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
 
   if (!post) {
     return { title: 'Post Not Found' };
@@ -28,12 +29,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       type: 'article',
       publishedTime: post.date,
+      modifiedTime: post.date,
+      authors: ['Marko'],
       tags: post.tags,
+      url: `${siteUrl}/blog/${id}`,
+      siteName: 'Marko Portfolio',
+      images: [
+        {
+          url: '/og-image.png',
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: 'summary_large_image',
       title: post.title,
       description: post.excerpt,
+      creator: '@markom',
+      images: ['/og-image.png'],
+    },
+    keywords: post.tags.join(', '),
+    other: {
+      'article:reading_time': post.readTime,
     },
   };
 }
@@ -55,19 +74,39 @@ export default async function SingleBlogPage({ params }: Props) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://johndoe.com';
 
+  // Get all posts for navigation
+  const allPosts = await getAllPosts();
+  const currentIndex = allPosts.findIndex((p) => p.id === id);
+  const prevPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
+  const nextPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
     datePublished: post.date,
+    dateModified: post.date,
     author: {
       '@type': 'Person',
       name: 'Marko',
       url: siteUrl,
+      jobTitle: 'Software Engineer',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Marko Portfolio',
+      url: siteUrl,
     },
     url: `${siteUrl}/blog/${id}`,
     keywords: post.tags.join(', '),
+    inLanguage: 'en-US',
+    isPartOf: {
+      '@type': 'Blog',
+      name: 'Marko Blog',
+      url: `${siteUrl}/blog`,
+    },
+    timeRequired: post.readTime,
   };
 
   return (
