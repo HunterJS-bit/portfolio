@@ -1,0 +1,82 @@
+---
+title: 'Self-Hosting Hobby Projects with Dokploy"'
+date: '2026-11-02'
+excerpt: 'How to use dokploy on your VPS'
+readTime: '5 min read'
+tags: ['Productivity', 'Dokploy', 'VPS']
+---
+
+As I mentioned in my previous blog posts, I bought and configured a VPS. Now I’d like to use it to host some hobby projects—mainly Node.js and Next.js apps, and perhaps a few projects in Python or Go.
+
+I didn’t want to use a cloud platform like Vercel, Heroku, or Netlify. I wanted something open source that I could self-host.
+
+After about half an hour of searching, I came across two interesting options: **Dokploy** and **Coolify**. Both are open-source, self-hosted platform-as-a-service (PaaS) tools.
+
+## What is a PaaS?
+
+A platform-as-a-service (PaaS) provides tools and services for building, deploying, and managing applications. It can simplify the deployment workflow, while still requiring you to manage the underlying server when you self-host.
+
+## What is Dokploy?
+
+[Dokploy](https://dokploy.com/) is a self-hosted PaaS built around Docker. It supports deploying applications written in languages such as Node.js, Python, and Go, as well as managing databases such as PostgreSQL, MongoDB, and Redis.
+
+I’m interested in Dokploy because I can run it on my own VPS, and I plan to work with containers. I’ll still need to pay for the VPS, but Dokploy itself is open source. Self-hosting also gives me more control over my infrastructure.
+
+## Dokploy or Coolify?
+
+While researching, I saw Dokploy and [Coolify](https://coolify.io/) recommended. I didn’t have a strong preference at first—I mainly wanted something that worked.
+
+From the comments and comparisons I read, Dokploy seemed like a good fit for my budget VPS. Some users reported that it uses fewer resources, and I preferred its interface. These impressions are subjective, though, and resource usage can vary depending on the server and workload.
+
+Coolify’s documentation seemed more comprehensive to me, and I found more examples for it online. I also watched this [video comparing Coolify and Dokploy](https://www.youtube.com/watch?v=RoANBROvUeE).
+
+In the end, I chose Dokploy. Here’s how I installed it on my VPS.
+
+## Installing Dokploy on a VPS
+
+For the latest installation instructions, refer to the [official Dokploy installation documentation](https://docs.dokploy.com/docs/core/installation).
+
+### 1. Check the required ports
+
+Make sure these ports are available on your server:
+
+- **80** — HTTP traffic, used by Traefik
+- **443** — HTTPS traffic, used by Traefik
+- **3000** — Dokploy dashboard
+
+The installation may fail if one of these ports is already in use.
+
+### 2. Configure the firewall
+
+If you use UFW, allow SSH and the ports Dokploy needs:
+
+```bash
+sudo ufw allow 22/tcp    # SSH
+sudo ufw allow 80/tcp    # HTTP
+sudo ufw allow 443/tcp   # HTTPS
+sudo ufw allow 3000/tcp  # Dokploy dashboard
+sudo ufw enable
+```
+
+In my [previous blog post](), I explained how to install and configure UFW.
+
+> **Security note:** Port `3000` exposes the Dokploy setup page and dashboard. If possible, restrict access to your IP address or use another secure access method instead of leaving it open to the entire internet. Make sure SSH is allowed before enabling UFW so you don’t lock yourself out.
+
+### 3. Install Dokploy
+
+Dokploy’s installer can install Docker if it isn’t already present, so a separate Docker installation step is optional. Run the official installation command:
+
+```bash
+curl -sSL https://dokploy.com/install.sh | sh
+```
+
+As with any command that downloads and runs a script, review the installer and make sure you trust its source before running it.
+
+### 4. Open the dashboard
+
+After installation, visit:
+
+http://YOUR_VPS_IP:3000
+
+Replace YOUR_SERVER_IP with your VPS’s public IP address. You should see the initial setup page, where you can create an administrator account. Choose a strong password and store it somewhere safe.
+Once setup is complete, log in to the Dokploy dashboard.
