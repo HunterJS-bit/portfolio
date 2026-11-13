@@ -1,7 +1,174 @@
 ---
-title: 'Deploy NodeJS to Dokploy'
+title: 'Deploy NodeJS with Github actions to Dokploy'
 date: '2026-11-11'
 excerpt: 'How to use dokploy & deloy NodeJS on it'
 readTime: '5 min read'
 tags: ['Dokploy', 'VPS', 'NodeJS', 'Tutorial']
 ---
+
+Today, we’ll deploy a simple Node.js service to Dokploy using GitHub Actions and GitHub Container Registry (GHCR).
+
+## Prerequisites
+
+- Basic JavaScript
+- A GitHub repository
+- A Dokploy on VPS
+- A GitHub personal access token with permission to read packages, if your GHCR image is private
+
+## Create the Node.js project
+
+Create a project folder and initialize it:
+
+```bash
+mkdir node-server
+cd node-server
+npm init -y
+```
+
+### Create a file named server.js:
+
+```
+const http = require("node:http");
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { "Content-Type": "text/plain; charset=utf-8" });
+  res.end("Hello World");
+});
+
+const port = Number(process.env.PORT) || 3000;
+
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Node server started on port ${port}`);
+});
+```
+
+### Update package.json so it includes a start script:
+
+{
+"name": "node-server",
+"version": "1.0.0",
+"main": "server.js",
+"scripts": {
+"start": "node server.js"
+}
+}
+
+The main field is not needed to run this app, but setting it to server.js keeps the package metadata consistent.
+If you prefer to keep the other fields created by npm init, that is fine—just add the start script.
+
+### Add a Dockerfile
+
+Create node-server/Dockerfile:
+
+```
+FROM node:24-alpine
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install --omit=dev
+
+COPY server.js ./
+
+ENV NODE_ENV=production
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+### Add the GitHub Actions workflow
+
+From the repository root, create .github/workflows/deploy-server.yml.
+
+This workflow assumes node-server/ is a subfolder in your repository. If it is the repository root, update the paths and Docker build context accordingly.
+
+```
+name: Build and deploy Node.js server
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "node-server/**"
+      - ".github/workflows/deploy-server.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./node-server
+          push: true
+          tags: ghcr.io/YOUR_GITHUB_USERNAME/node-server:latest
+
+      - name: Trigger Dokploy deployment
+        env:
+          DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+          DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+          DOKPLOY_APP_ID: ${{ secrets.DOKPLOY_APP_ID }}
+        run: |
+          set -euo pipefail
+
+          : "${DOKPLOY_URL:?Set the DOKPLOY_URL secret}"
+          : "${DOKPLOY_API_KEY:?Set the DOKPLOY_API_KEY secret}"
+          : "${DOKPLOY_APP_ID:?Set the DOKPLOY_APP_ID secret}"
+
+          response_file="$RUNNER_TEMP/dokploy-deploy-response.txt"
+          http_code=$(curl -sS -o "$response_file" -w "%{http_code}" \
+            --request POST \
+            --url "${DOKPLOY_URL%/}/api/application.deploy" \
+            --header "x-api-key: $DOKPLOY_API_KEY" \
+            --header "Content-Type: application/json" \
+            --data "{\"applicationId\":\"$DOKPLOY_APP_ID\"}")
+
+          cat "$response_file"
+          if [ "$http_code" -lt 200 ] || [ "$http_code" -ge 300 ]; then
+            echo "Dokploy deployment request failed with HTTP $http_code"
+            exit 1
+          fi
+```
+
+Replace `YOUR_GITHUB_USERNAME` with the lowercase GitHub username or organization that owns the image.
+
+Add these repository secrets in **Your GitHub repo → Settings → Secrets and variables → Actions**:
+
+- `DOKPLOY_URL`: Your Dokploy base URL, without a trailing slash
+- `DOKPLOY_API_KEY`: Your Dokploy API key
+- `DOKPLOY_APP_ID`: The ID of the Dokploy application
+
+This workflow builds and pushes the image, then asks Dokploy to redeploy the configured application.
+
+It does **not** update Dokploy environment variables. Set `PORT=3000` in the Dokploy application’s environment settings instead.
+
+## Configure the application in Dokploy
+
+1. Login to Dokploy account
+2. Create a project and an application.
+3. Choose **Docker image** as the deployment source.
+4. Set the image to `ghcr.io/YOUR_GITHUB_USERNAME/node-server:latest`.
+5. Use your GitHub username and a personal access token with `read:packages` permission—not your GitHub account password. (So you can have proper permissions)
+6. Set the container port to `3000` and configure any required domain or proxy settings.
+7. Set `PORT=3000` in the application’s environment variables if you want to make it explicit.
+
+The workflow listens for pushes to `master` that change files under `node-server/` or the workflow itself.
+
+With this setup, changes to the server trigger a new image build and a Dokploy deployment.
