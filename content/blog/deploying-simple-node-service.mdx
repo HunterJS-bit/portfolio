@@ -44,14 +44,16 @@ server.listen(port, "0.0.0.0", () => {
 
 ### Update package.json so it includes a start script:
 
+```json
 {
-"name": "node-server",
-"version": "1.0.0",
-"main": "server.js",
-"scripts": {
-"start": "node server.js"
+  "name": "node-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  }
 }
-}
+```
 
 The main field is not needed to run this app, but setting it to server.js keeps the package metadata consistent.
 If you prefer to keep the other fields created by npm init, that is fine—just add the start script.
