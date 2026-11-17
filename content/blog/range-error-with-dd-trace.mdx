@@ -1,0 +1,78 @@
+---
+title: 'Range error with dd-trace'
+date: '2026-11-17'
+excerpt: 'Resolving range error with dd-trace library'
+readTime: '2 min read'
+tags: ['Production', 'Bug', 'Resolve']
+---
+
+# Range error with dd-trace
+
+If you manage multiple Node.js microservices running on AWS ECS, you live and die by observability. Tools like Datadog (dd-trace for NodeJS) are essential for tracing requests across SQS queues, SNS topics, and DynamoDB tables.
+But occasionally, a tool meant to make your services easier to understand can contribute to a production issue.
+
+You may encounter an error like this:
+
+```
+RangeError: Maximum call stack size exceeded. Deserialization error: to see the raw response, inspect the hidden field {error}.$response on this object.
+```
+
+For example, your tracer might be configured like this:
+
+```
+import tracer from dd-trace
+
+tracer.init({
+    logInjection: true,
+    env: prod,
+    service: service_name,
+    version: 1.0
+})
+tracer.use('aws-sdk', {
+    service: "service_name",
+    splitByAwsService: false
+})
+```
+
+## What Might Be Happening?
+
+Datadog instruments AWS SDK calls so it can collect request details and connect them to distributed traces. As part of that process, it may inspect or serialize request and response objects.
+Some JavaScript objects contain circular references: a property points to another object that eventually points back to the original.
+
+If code tries to recursively inspect such an object without handling circular references, it can keep traversing the same objects until the call stack runs out.
+Node.js then throws:
+
+```
+Maximum call stack size exceeded
+```
+
+Circular references are one possible cause; deeply nested objects or other serialization issues can also lead to similar errors
+
+## Possible Solutions
+
+Bump dd-trace to latest version
+
+```
+npm install dd-trace@latest
+```
+
+Other option that worked for me was to disable aws-sdk plugin entirely
+
+```
+import tracer from 'dd-trace'
+
+tracer.init({
+  logInjection: true,
+  env: 'prod',
+  service: 'service_name',
+  version: '1.0',
+})
+
+// AWS SDK instrumentation disabled
+// tracer.use('aws-sdk', {
+//   service: 'service_name',
+//   splitByAwsService: false,
+// })
+```
+
+This is just a note that a single circular reference can turn your tracing agent into a recursive trap. And you can spend a lot of time tracing what went wrong.
