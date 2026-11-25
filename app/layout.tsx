@@ -10,7 +10,7 @@ const openSans = Roboto({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-opensans',
-  weight: [400, 500, 600],
+  weight: 'variable',
   preload: true,
 });
 
@@ -19,7 +19,7 @@ const robotoMono = Nunito({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-roboto-mono',
-  weight: [400, 500],
+  weight: 'variable',
   preload: true,
 });
 
