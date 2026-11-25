@@ -1,0 +1,84 @@
+---
+title: 'Choosing the Node js CMS platform'
+date: '2026-11-25'
+excerpt: 'Choose the rigth CMS plafrom for your nodejs project'
+readTime: '3 min read'
+tags: ['CMS', 'NodeJS', 'Tutorial']
+---
+
+I wanted to tryout simple CMS for a new blog where I could write articles and invite other authors to contribute. Since I was starting from scratch, I had a few requirements:
+
+- It had to be free and open source.
+- It needed good documentation.
+- It had to support JavaScript and Node.js.
+- I wanted reasonable control over what I was building.
+- It had to be self-hostable.
+- It shouldn’t use too many resources, since I wanted to keep hosting requirements modest.
+
+After looking around, I narrowed my options to three contenders: **Strapi**, **Directus**, and **Payload CMS**.
+
+---
+
+## A Note About Existing Databases
+
+While comparing these platforms, I also looked into how they work with existing databases. This wasn’t a major factor for my blog, since I was starting from scratch, but it could make a big difference for other projects.
+
+- **Strapi** is generally designed to manage its own database schema. That can make it a less natural fit when connecting to a database with existing tables and data. If you need this kind of setup, check Strapi’s current documentation and test carefully in a safe environment.
+- **Payload CMS** is flexible, particularly when using its supported database adapters. However, working with an existing schema may require custom configuration and development. Check the current documentation to confirm that your database and use case are supported.
+- **Directus** is designed to work with existing SQL databases. It can inspect a database’s schema and provide an administrative interface and APIs on top of it. This makes it appealing if you already have data you want to manage without redesigning your schema.
+
+In short, the right choice depends on whether you’re building a new content system or adding a management layer to an existing database.
+
+---
+
+## Resource Usage
+
+Resource use was another consideration because I wanted to self-host the CMS without needing a large server. The figures below are rough estimates, not guarantees. Actual usage depends on configuration, database, traffic, background jobs, and whether the frontend runs in the same process.
+
+| CMS Setup                       | Rough RAM Estimate | Notes                                                                                                                                                                                             |
+| :------------------------------ | :----------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Payload embedded in Next.js** | ~200–400 MB        | Payload can run inside the Next.js application, combining the admin interface, API, and server-rendered frontend in one Node.js process. This can avoid the overhead of a separate CMS container. |
+| **Directus standalone**         | ~250–450 MB        | Directus runs as a separate application, commonly in its own container. It includes its API and web interface, so it has its own baseline memory use.                                             |
+| **Strapi**                      | Not listed here    | I didn’t have a reliable estimate to include.                                                                                                                                                     |
+
+> **Note:** These numbers are best treated as a starting point for comparison. For a realistic estimate, monitor memory usage on the actual server and workload you plan to run.
+
+---
+
+## Platform Breakdown
+
+### Strapi
+
+Strapi’s marketing and feature set made a strong first impression. In practice, though, I didn’t enjoy working with it. I found the developer experience frustrating, and upgrading between versions felt painful.
+
+That’s a personal assessment, but it was enough to rule Strapi out for my project.
+
+### Directus
+
+Directus has a polished interface, but I see it more as a data platform than a traditional content-focused CMS. You can use it to build content workflows, but I found that experience less natural for my needs.
+
+I also wanted stronger TypeScript support and a broader selection of templates and starter projects. Overall, Directus seems like a great option for managing data in an existing database, but it wasn’t the right fit for the blog I wanted to build.
+
+### Payload CMS
+
+Payload CMS stood out as a well-built, open-source option with strong TypeScript support and a good developer experience. It also integrates naturally with Next.js, which was a major advantage for me.
+
+The trade-off is that Payload clearly favors the React and Next.js ecosystem. If you’re using another framework, integration may take more work.
+
+---
+
+## Why I Chose Payload
+
+For now, I’ve chosen **Payload CMS**. I like that it’s Next.js-native and relatively easy to understand once you start working with it. Running it within my Next.js project also seems like a practical way to keep the deployment simple and the resource footprint modest.
+
+The admin dashboard is simple, though I wouldn’t call its interface especially polished. Live preview is useful, but it didn’t feel entirely new to me after using WordPress. I’m more impressed by versioning and content history: those features are straightforward to enable and make it easier to track changes.
+
+Payload also gives you a lot of control, which is both a strength and a potential drawback. Flexibility can mean more setup and more decisions to make. I had some trouble understanding Payload’s types at first, and localization may require more consideration depending on your needs.
+
+---
+
+## Final Thoughts
+
+So far, I think Payload was the right choice for this project. It fits my Next.js setup, offers the control I wanted, and seems suitable for a self-hosted blog with modest resource requirements.
+
+But choosing a CMS is always about trade-offs—and time will tell whether this remains the best fit as the blog grows.
