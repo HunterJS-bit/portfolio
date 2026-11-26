@@ -1,0 +1,73 @@
+---
+title: 'Trying out AI coding tools'
+date: '2026-11-27'
+excerpt: 'Trying ouy Antigravity, Windsurf & OpenCode'
+readTime: '3 min read'
+tags: ['AI tools', 'Antigravity', 'OpenCode', 'Windsurf']
+---
+
+# Comparing Free AI Coding Tools: Antigravity, Windsurf, and OpenCode
+
+AI coding tools promise to make building software faster—but the experience can vary a lot depending on the tool, model, and task. I’ve tried Antigravity, Windsurf, and OpenCode, mostly using their free options. Here’s how they’ve worked for me in practice.
+
+> _Note: This is based on my personal experience, not a controlled benchmark. Free usage limits and paid prices can change over time._
+
+## Antigravity: Fast, capable, but limited by usage
+
+I first tried Antigravity a few months ago. At the time, it offered access to models like Gemini 3 and Claude 4.5. However, I quickly hit the free usage limit after sending just a few large prompts.
+
+One standout feature for web projects was its virtual browser: it could preview changes live while I edited the code. Watching the results take shape in real time was a game-changer, and it also felt incredibly fast.
+
+More importantly, Antigravity often seemed to understand the underlying problem—not just the immediate code change I requested—and produced solutions that aligned with my expectations.
+It reminded me of working in a VS Code-based editor (and the Antigravity IDE is indeed derived from VS Code).
+
+- **Best for:** People who want a fast editor that can reason through tasks and preview web changes.
+- **Watch out for:** Free usage runs out quickly if you send large prompts.
+
+## Windsurf: Handy for bugs, with a token-quota model
+
+I mostly used Windsurf when I ran into bugs I didn’t feel like solving myself. While it previously used a credit-based system, Cognition (which acquired Windsurf in July 2025 and later rebranded the desktop app as **Devin Desktop**) replaced credits with daily and weekly token quotas. In my experience, I rarely hit the daily limit.
+
+I primarily used the SWE-1.6 model. It was decent for reviewing and fixing issues, though it wasn’t always my go-to for more complex tasks. You’ll want to check Cognition's official Devin site for the latest product and plan details.
+
+- **Best for:** Occasional bug-fixing and coding assistance.
+- **Watch out for:** The unpublished token quotas and rebranding under Devin can make it harder to predict how much usage you get.
+
+## OpenCode: My favorite workflow so far
+
+OpenCode was the last tool I tried, and it’s become my favorite for building frontend features. Sometimes, it even comes up with more creative design ideas than I do—which is impressive since I’m not great at visualizing designs in my head. It’s surprised me with good results more than once. 🤣
+
+That said, one frustration is that for small changes, it sometimes updates a lot of the codebase instead of making a narrow, localized fix. I wish it were more careful about keeping changes focused.
+
+I also prefer its CLI (terminal UI) over its desktop GUI by a significant margin. The simple **Plan** and **Build** modes make the workflow feel intuitive and efficient. Overall, OpenCode’s workflow has been the strongest for me compared to the other tools I’ve tried.
+
+- **Best for:** People who like working in the terminal and want a straightforward plan-then-build workflow.
+- **Watch out for:** Review the diff carefully, especially when requesting small fixes.
+
+---
+
+> **A note on “free”:** Hosted tools like Antigravity and Windsurf offer free tiers with usage caps and limited model choices, whereas OpenCode is free and open-source software (you either bring your own API keys, pay per token via OpenCode Console, or buy an optional subscription). The table below lists published paid prices as a rough comparison—not a guarantee that every feature or model is included at that price.
+
+## Paid-Plan Pricing Snapshot
+
+Prices and plan names can change, so always check the official pages before subscribing.
+
+| Tool                 | Published Paid Options                                                                                                                                      |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Antigravity**      | **Google AI Plus** at $4.99/month, **Google AI Pro** at $19.99/month, and **Google AI Ultra** starting at $99.99/month (up to $199.99/month for Ultra 20x). |
+| **Windsurf / Devin** | Acquired by Cognition and rebranded to **Devin Desktop**. Individual plans include **Pro** at $20/month and **Max** at $200/month.                          |
+| **OpenCode**         | Free & open-source CLI/Desktop app (BYOK or pay-as-you-go Console). Optional subscriptions: **OpenCode Go** at $10/month and **Go Plus** at $40/month.      |
+| **Cursor**           | **Plus** at $8/month, **Premium** at $30/month, **Super** at $100/month, and **Ultra** at $200/month.                                                       |
+| **Claude Code**      | Included with Anthropic’s paid plans: **Pro** at $20/month, **Max** at $100/month, and **Ultra** at $200/month.                                             |
+
+_Plan names, prices, and what’s included may vary by region or change over time, so treat this as a snapshot rather than a definitive price list._
+
+## Which One Would I Choose?
+
+- **Antigravity** if I want speed, strong problem-solving, and a live preview for web work.
+- **Windsurf** if I need a convenient assistant for occasional bug fixes.
+- **OpenCode** if I prefer a CLI-first workflow and a simple planning process.
+
+> \*NOTE: I checked this only on free tier, probably on padi versions this tools give much better results.
+
+I still plan to try Claude Code and Cursor to compare their results with these tools.
